@@ -1,6 +1,6 @@
 "use client";
 
-import { ROLES } from "@/lib/catalog";
+import { ALL_SKILLS, ROLES } from "@/lib/catalog";
 import type { Level, Profile } from "@/lib/types";
 import { Button, Card, inputClass, labelClass } from "./ui";
 
@@ -56,6 +56,7 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
               <li key={index} className="flex flex-wrap gap-2 sm:flex-nowrap">
                 <input
                   aria-label={`Skill ${index + 1} name`}
+                  list="skill-options"
                   className={`${inputClass} min-w-0 flex-1`}
                   value={skill.name}
                   maxLength={40}
@@ -85,6 +86,11 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
               </li>
             ))}
           </ul>
+          <datalist id="skill-options">
+            {ALL_SKILLS.map((skill) => (
+              <option key={skill} value={skill} />
+            ))}
+          </datalist>
           <Button
             variant="ghost"
             className="mt-2"

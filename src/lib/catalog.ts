@@ -30,6 +30,30 @@ export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[
     core: ["Linux", "Git", "Docker", "CI/CD", "Cloud"],
     useful: ["Kubernetes", "Python", "Networking"],
   },
+  "Mobile App Developer": {
+    core: ["JavaScript", "TypeScript", "React", "React Native", "REST APIs"],
+    useful: ["Git", "Testing", "UI Design"],
+  },
+  "Cloud Engineer": {
+    core: ["Cloud", "Linux", "Networking", "Docker", "Kubernetes"],
+    useful: ["CI/CD", "Terraform", "Python", "Git"],
+  },
+  "AI/ML Engineer": {
+    core: ["Python", "Machine Learning", "Deep Learning", "Statistics", "Pandas"],
+    useful: ["SQL", "Docker", "Git", "REST APIs"],
+  },
+  "UI/UX Designer": {
+    core: ["UI Design", "UX Research", "Figma", "Accessibility", "HTML", "CSS"],
+    useful: ["JavaScript", "Git"],
+  },
+  "Game Developer": {
+    core: ["C#", "Unity", "Game Design", "Git"],
+    useful: ["JavaScript", "TypeScript", "Testing"],
+  },
+  "Software Tester (QA)": {
+    core: ["Testing", "Test Automation", "JavaScript", "REST APIs", "Git"],
+    useful: ["Python", "SQL", "CI/CD"],
+  },
 };
 
 export const ROLES = Object.keys(ROLE_REQUIREMENTS);
@@ -180,7 +204,77 @@ const SKILL_CATALOG: Record<string, Entry> = {
     ],
     exercise: "Deploy a container to a local cluster and scale it to three replicas.",
   },
+  "React Native": {
+    resources: [
+      { title: "React Native documentation", provider: "reactnative.dev", url: "https://reactnative.dev/docs/getting-started" },
+    ],
+    exercise: "Build a two-screen mobile app with navigation and persistent state.",
+  },
+  Terraform: {
+    resources: [
+      { title: "Terraform tutorials", provider: "HashiCorp Developer", url: "https://developer.hashicorp.com/terraform/tutorials" },
+    ],
+    exercise: "Write a Terraform configuration that provisions a cloud storage bucket and outputs its URL.",
+  },
+  "Deep Learning": {
+    resources: [
+      { title: "Intro to Deep Learning", provider: "Kaggle Learn", url: "https://www.kaggle.com/learn/intro-to-deep-learning" },
+      { title: "PyTorch tutorials", provider: "PyTorch", url: "https://pytorch.org/tutorials/" },
+    ],
+    exercise: "Train a small neural network to classify handwritten digits and plot the loss curve.",
+  },
+  "UI Design": {
+    resources: [
+      { title: "Learn Design", provider: "web.dev", url: "https://web.dev/learn/design" },
+    ],
+    exercise: "Design a consistent type scale, colour palette and button component set for a web app.",
+  },
+  "UX Research": {
+    resources: [
+      { title: "UX Research Cheat Sheet", provider: "Nielsen Norman Group", url: "https://www.nngroup.com/articles/ux-research-cheat-sheet/" },
+    ],
+    exercise: "Write a five-task usability test script and run it with three people on an existing site.",
+  },
+  Figma: {
+    resources: [
+      { title: "Figma Learn", provider: "Figma", url: "https://help.figma.com/hc/en-us/categories/360002051613-Get-started" },
+    ],
+    exercise: "Create an interactive three-screen mobile prototype in Figma using auto layout and components.",
+  },
+  Accessibility: {
+    resources: [
+      { title: "Learn Accessibility", provider: "web.dev", url: "https://web.dev/learn/accessibility" },
+      { title: "Accessibility guides", provider: "MDN", url: "https://developer.mozilla.org/en-US/docs/Web/Accessibility" },
+    ],
+    exercise: "Audit a web page with keyboard navigation and a screen reader, and fix every issue you find.",
+  },
+  "C#": {
+    resources: [
+      { title: "C# documentation and tutorials", provider: "Microsoft Learn", url: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
+    ],
+    exercise: "Write a console program in C# that models an inventory with classes, interfaces and LINQ.",
+  },
+  Unity: {
+    resources: [
+      { title: "Unity Learn pathways", provider: "Unity", url: "https://learn.unity.com" },
+    ],
+    exercise: "Build a playable 2D platformer level with player movement, collectables and a score counter.",
+  },
+  "Game Design": {
+    resources: [
+      { title: "Game development guides", provider: "MDN", url: "https://developer.mozilla.org/en-US/docs/Games" },
+    ],
+    exercise: "Write a one-page game design document defining the core loop, controls and win condition for a small game.",
+  },
+  "Test Automation": {
+    resources: [
+      { title: "Playwright getting started", provider: "Playwright", url: "https://playwright.dev/docs/intro" },
+    ],
+    exercise: "Write end-to-end Playwright tests covering sign-in, form validation and navigation for a web app.",
+  },
 };
+
+export const ALL_SKILLS = Object.keys(SKILL_CATALOG).sort();
 
 const ALIASES: Record<string, string> = {
   js: "javascript",
