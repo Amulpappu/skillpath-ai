@@ -2,7 +2,7 @@ import "server-only";
 import { GoogleGenAI } from "@google/genai";
 import type { z } from "zod";
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+const MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
 const TIMEOUT_MS = 8_000;
 
 let client: GoogleGenAI | null = null;
