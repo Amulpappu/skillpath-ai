@@ -4,6 +4,7 @@ import { buildMatch, requirementsFromCatalog } from "@/lib/agents/careerMatcher"
 import { buildRoadmap, gapsFrom, insertRemedialStep, remedialDraftFromRules, stepId } from "@/lib/agents/learningPlanner";
 import { mentorFromRules, runAdaptation, runAnalysis } from "@/lib/agents/mentor";
 import { analyseWithRules } from "@/lib/agents/skillAnalyst";
+import { ROLE_REQUIREMENTS } from "@/lib/catalog";
 import type { AgentEvent, QuizResult } from "@/lib/types";
 import { sampleProfile } from "./fixtures";
 
@@ -96,19 +97,27 @@ describe("Learning Planner", () => {
 });
 
 describe("Assessment Agent", () => {
-  it("serves the built-in bank for the sample skills", async () => {
-    const quiz = await generateQuiz("JS", "beginner");
+  it("serves the built-in bank for every core role skill across levels", async () => {
+    const coreSkills = new Set(Object.values(ROLE_REQUIREMENTS).flatMap((r) => r.core));
+    for (const skill of coreSkills) {
+      for (const level of ["beginner", "intermediate", "advanced"] as const) {
+        const questions = quizFromBank(skill, level);
+        expect(questions).toHaveLength(5);
+        for (const question of questions!) {
+          expect(question.options).toHaveLength(4);
+          expect(question.answerIndex).toBeGreaterThanOrEqual(0);
+          expect(question.answerIndex).toBeLessThan(4);
+        }
+      }
+    }
+    const quiz = await generateQuiz("JS", "intermediate");
     expect(quiz.source).toBe("rules");
     expect(quiz.questions).toHaveLength(5);
-    for (const question of quiz.questions) {
-      expect(question.options).toHaveLength(4);
-      expect(question.answerIndex).toBeGreaterThanOrEqual(0);
-      expect(question.answerIndex).toBeLessThan(4);
-    }
+    expect(quizFromBank("JS", "beginner")).not.toEqual(quizFromBank("JS", "advanced"));
   });
 
   it("reports when no offline quiz exists", async () => {
-    expect(quizFromBank("Kubernetes")).toBeUndefined();
+    expect(quizFromBank("Kubernetes", "beginner")).toBeUndefined();
     await expect(generateQuiz("Kubernetes", "beginner")).rejects.toBeInstanceOf(QuizUnavailableError);
   });
 });

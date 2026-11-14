@@ -35,8 +35,8 @@ export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[
     useful: ["Git", "Testing", "UI Design"],
   },
   "Cloud Engineer": {
-    core: ["Cloud", "Linux", "Networking", "Docker", "Kubernetes"],
-    useful: ["CI/CD", "Terraform", "Python", "Git"],
+    core: ["Cloud", "Linux", "Networking", "Docker", "CI/CD"],
+    useful: ["Kubernetes", "Terraform", "Python", "Git"],
   },
   "AI/ML Engineer": {
     core: ["Python", "Machine Learning", "Deep Learning", "Statistics", "Pandas"],

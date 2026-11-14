@@ -128,8 +128,13 @@ export default function Home() {
   const isDone = (step: RoadmapStep) =>
     doneStepIds.includes(step.id) || (!step.remedial && profile.learnedSkills.some((s) => normalizeSkill(s) === normalizeSkill(step.skill)));
 
-  const levelFor = (skill: string): Level =>
-    result?.match.requiredSkills.find((s) => normalizeSkill(s.name) === normalizeSkill(skill))?.status === "partial" ? "intermediate" : "beginner";
+  const levelFor = (skill: string): Level => {
+    const key = normalizeSkill(skill);
+    if (profile.learnedSkills.some((s) => normalizeSkill(s) === key)) return "advanced";
+    const found = profile.skills.find((s) => normalizeSkill(s.name) === key);
+    if (!found) return "beginner";
+    return found.level === "beginner" ? "intermediate" : "advanced";
+  };
 
   const onQuizGraded = async (step: RoadmapStep, quiz: QuizResult) => {
     if (!result) return;

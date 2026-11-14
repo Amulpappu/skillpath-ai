@@ -70,9 +70,12 @@ export function Quiz({ skill, level, onGraded, onClose }: Props) {
         submit();
       }}
     >
-      <p className="text-xs text-muted">
-        Questions from {quiz.source === "gemini" ? "Gemini" : "the built-in question bank"}. Pass mark {PASS_MARK}%.
-      </p>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="text-sm font-semibold">{`${level[0].toUpperCase()}${level.slice(1)} quiz`}</p>
+        <p className="text-xs text-muted">
+          Questions from {quiz.source === "gemini" ? "Gemini" : "the built-in question bank"}. Pass mark {PASS_MARK}%.
+        </p>
+      </div>
       {quiz.questions.map((question, qi) => {
         const chosen = answers[qi];
         return (
