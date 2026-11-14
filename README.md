@@ -2,6 +2,34 @@
 
 An AI-powered learning platform that understands a learner's skills, finds the gaps for a target career, and builds a personalised roadmap that adapts as they progress. Built for **PromptWars × Rathinam Technical Campus** (Google for Developers and Hack2skill).
 
+## Problem statement (PromptWars × RTC)
+
+Organizations and universities find it difficult to identify what skills their employees or students lack and what they need to learn to achieve their career goals. Traditional learning platforms provide the same courses to everyone without considering their existing skills, learning progress or career interests.
+
+### Challenge
+Build an AI-powered learning platform that understands an individual's skills, identifies missing skills and recommends a personalised learning path to help them achieve their target career.
+
+### Expected features and how SkillPath AI delivers them
+| # | Expected feature | SkillPath AI |
+|---|---|---|
+| 1 | User profile: learner details, existing skills, certifications, projects, career goals | Profile form with skill picker, per-skill level, certifications, projects and 13 career roles; saved in the browser |
+| 2 | Skill analysis: strengths and weaknesses from skills and assessments | Skill Analyst agent, plus quiz results that feed back into the plan |
+| 3 | Career matching: compare current skills with the selected job role | Career Matcher agent: required skills marked Have / Partial / Missing and a weighted match % |
+| 4 | Learning recommendations: courses, tutorials and practical exercises | Learning Planner agent: week-by-week roadmap with curated free courses, tutorials and an exercise per skill |
+| 5 | Progress tracking: learning progress and assessment performance | Steps completed, match at start vs now, quiz history with scores |
+| 6 | AI mentor: guidance that updates with performance | AI Mentor agent, updated after every analysis, quiz and goal change |
+
+### Agentic AI requirement
+Five specialised agents (Skill Analyst, Career Matcher, Learning Planner, Assessment Agent, AI Mentor) run as a pipeline, each using the previous agent's output; hand-offs are shown live in the Agent activity panel. The plan adapts:
+- **Poor assessment** (below 60%): the Assessment Agent flags the skill, the Learning Planner inserts a revision step and the Mentor explains the change.
+- **Career goal change:** the whole pipeline re-runs for the new role, keeping skills already completed.
+
+### Target scenario
+A student wants to become a **Full Stack Developer**. Current skills: Python, SQL and basic HTML. Missing skills: JavaScript, React, Node.js. SkillPath AI identifies the gaps, builds the roadmap, recommends resources and tracks progress. Try it with **Load sample learner**.
+
+### Expected deliverable
+A working AI-powered application demonstrating personalised learning recommendations, AI agent collaboration and adaptive progress tracking. Live: https://skillpath-ai-green.vercel.app/
+
 ## The problem
 
 Universities and organisations struggle to see which skills a learner lacks for their career goal, and most learning platforms give everyone the same courses.
@@ -92,4 +120,4 @@ tests              unit and pipeline tests
 
 ## Live demo
 
-Add your deployed link here.
+https://skillpath-ai-green.vercel.app/
