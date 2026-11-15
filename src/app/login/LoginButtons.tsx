@@ -19,7 +19,10 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
 
   async function oauth(provider: ProviderId) {
     setBusy(provider); setError(false);
-    const { error } = await supabaseBrowser().auth.signInWithOAuth({
+    const supabase = supabaseBrowser();
+    // Clear any old, broken session in this browser first so it can't wipe the new sign-in midway.
+    await supabase.auth.signOut({ scope: "local" }).catch(() => undefined);
+    const { error } = await supabase.auth.signInWithOAuth({
       provider, options: { redirectTo: redirectTo(), scopes: provider === "azure" ? "email openid profile" : undefined },
     });
     if (error) { setError(true); setBusy(null); }
@@ -28,7 +31,9 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
   async function emailLink(e: React.FormEvent) {
     e.preventDefault();
     setBusy("email"); setError(false);
-    const { error } = await supabaseBrowser().auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: redirectTo() } });
+    const supabase = supabaseBrowser();
+    await supabase.auth.signOut({ scope: "local" }).catch(() => undefined);
+    const { error } = await supabase.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: redirectTo() } });
     setBusy(null);
     if (error) setError(true); else setSentTo(email.trim());
   }

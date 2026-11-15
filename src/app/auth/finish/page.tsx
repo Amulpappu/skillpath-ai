@@ -22,8 +22,12 @@ function Finish() {
     const next = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
     (async () => {
       const supabase = supabaseBrowser();
+      // The client finishes a ?code= in the address bar by itself while it starts up; wait for that first.
+      const { data: started } = await supabase.auth.getSession();
+      if (started.session) { router.replace(next); router.refresh(); return; }
       if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        const flowId = params.get("sb_flow_id");
+        const { error } = await supabase.auth.exchangeCodeForSession(code, flowId ? { flowId } : undefined);
         if (!error) { router.replace(next); router.refresh(); return; }
       }
       const { data } = await supabase.auth.getUser();
