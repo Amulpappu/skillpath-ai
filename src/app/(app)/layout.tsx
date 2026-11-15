@@ -16,6 +16,7 @@ const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
   { href: "/jobs", key: "nav.jobs", ready: true },
   { href: "/courses", key: "nav.courses", ready: true },
   { href: "/progress", key: "nav.progress", ready: true },
+  { href: "/settings", key: "nav.settings", ready: true },
 ];
 
 export default async function AppLayout({ children }: { children: ReactNode }) {

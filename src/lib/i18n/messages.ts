@@ -31,6 +31,10 @@ const en = {
   "login.failed": "Sign-in didn't work. Please try again.",
   "login.disabled": "Sign-in is not set up on this server yet. You can still use the planner as a guest.",
   "login.terms": "By continuing you agree to use SkillPath AI fairly and keep your account secure.",
+  "login.email": "Email address",
+  "login.sendLink": "Email me a sign-in link",
+  "login.sent": "Check your email: we sent a sign-in link to",
+  "login.or": "or",
   "agents.title": "Agent activity",
   "agents.running": "Running",
   "agents.idle": "Idle",
@@ -52,6 +56,7 @@ const hi: Messages = {
   "login.continueWith": "इसके साथ जारी रखें:", "login.failed": "साइन इन नहीं हुआ। कृपया फिर से प्रयास करें।",
   "login.disabled": "इस सर्वर पर साइन इन अभी सेट नहीं है। आप अतिथि के रूप में प्लानर का उपयोग कर सकते हैं।",
   "login.terms": "जारी रखकर आप SkillPath AI का उचित उपयोग करने और अपना खाता सुरक्षित रखने के लिए सहमत हैं।",
+  "login.email": "ईमेल पता", "login.sendLink": "मुझे साइन-इन लिंक ईमेल करें", "login.sent": "अपना ईमेल देखें: हमने साइन-इन लिंक भेजा है", "login.or": "या",
   "agents.title": "एजेंट गतिविधि", "agents.running": "चल रहा है", "agents.idle": "निष्क्रिय",
 };
 
@@ -68,6 +73,7 @@ const ta: Messages = {
   "login.continueWith": "இதன் மூலம் தொடரவும்:", "login.failed": "உள்நுழைவு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
   "login.disabled": "இந்த சர்வரில் உள்நுழைவு இன்னும் அமைக்கப்படவில்லை. விருந்தினராக திட்டமிடலைப் பயன்படுத்தலாம்.",
   "login.terms": "தொடர்வதன் மூலம் SkillPath AI-ஐ நியாயமாகப் பயன்படுத்தவும் உங்கள் கணக்கைப் பாதுகாப்பாக வைத்திருக்கவும் ஒப்புக்கொள்கிறீர்கள்.",
+  "login.email": "மின்னஞ்சல் முகவரி", "login.sendLink": "உள்நுழைவு இணைப்பை மின்னஞ்சலில் அனுப்பு", "login.sent": "உங்கள் மின்னஞ்சலைப் பாருங்கள்: உள்நுழைவு இணைப்பு அனுப்பப்பட்டது", "login.or": "அல்லது",
   "agents.title": "முகவர் செயல்பாடு", "agents.running": "இயங்குகிறது", "agents.idle": "செயலற்றது",
 };
 
@@ -84,6 +90,7 @@ const te: Messages = {
   "login.continueWith": "దీనితో కొనసాగండి:", "login.failed": "సైన్ ఇన్ కాలేదు. దయచేసి మళ్ళీ ప్రయత్నించండి.",
   "login.disabled": "ఈ సర్వర్‌లో సైన్ ఇన్ ఇంకా సెటప్ కాలేదు. మీరు అతిథిగా ప్లానర్‌ను ఉపయోగించవచ్చు.",
   "login.terms": "కొనసాగడం ద్వారా SkillPath AI ని న్యాయంగా ఉపయోగించడానికి మరియు మీ ఖాతాను సురక్షితంగా ఉంచడానికి మీరు అంగీకరిస్తున్నారు.",
+  "login.email": "ఈమెయిల్ చిరునామా", "login.sendLink": "సైన్-ఇన్ లింక్‌ను ఈమెయిల్ చేయండి", "login.sent": "మీ ఈమెయిల్ చూడండి: సైన్-ఇన్ లింక్ పంపాము", "login.or": "లేదా",
   "agents.title": "ఏజెంట్ కార్యాచరణ", "agents.running": "నడుస్తోంది", "agents.idle": "నిష్క్రియం",
 };
 
@@ -100,6 +107,7 @@ const kn: Messages = {
   "login.continueWith": "ಇದರೊಂದಿಗೆ ಮುಂದುವರಿಸಿ:", "login.failed": "ಸೈನ್ ಇನ್ ಆಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
   "login.disabled": "ಈ ಸರ್ವರ್‌ನಲ್ಲಿ ಸೈನ್ ಇನ್ ಇನ್ನೂ ಹೊಂದಿಸಿಲ್ಲ. ನೀವು ಅತಿಥಿಯಾಗಿ ಯೋಜಕವನ್ನು ಬಳಸಬಹುದು.",
   "login.terms": "ಮುಂದುವರಿಯುವ ಮೂಲಕ SkillPath AI ಅನ್ನು ನ್ಯಾಯವಾಗಿ ಬಳಸಲು ಮತ್ತು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿಡಲು ನೀವು ಒಪ್ಪುತ್ತೀರಿ.",
+  "login.email": "ಇಮೇಲ್ ವಿಳಾಸ", "login.sendLink": "ಸೈನ್-ಇನ್ ಲಿಂಕ್ ಇಮೇಲ್ ಮಾಡಿ", "login.sent": "ನಿಮ್ಮ ಇಮೇಲ್ ನೋಡಿ: ಸೈನ್-ಇನ್ ಲಿಂಕ್ ಕಳುಹಿಸಲಾಗಿದೆ", "login.or": "ಅಥವಾ",
   "agents.title": "ಏಜೆಂಟ್ ಚಟುವಟಿಕೆ", "agents.running": "ಚಾಲನೆಯಲ್ಲಿದೆ", "agents.idle": "ನಿಷ್ಕ್ರಿಯ",
 };
 
@@ -116,6 +124,7 @@ const ml: Messages = {
   "login.continueWith": "ഇതുപയോഗിച്ച് തുടരുക:", "login.failed": "സൈൻ ഇൻ പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക.",
   "login.disabled": "ഈ സെർവറിൽ സൈൻ ഇൻ ഇതുവരെ സജ്ജമാക്കിയിട്ടില്ല. അതിഥിയായി പ്ലാനർ ഉപയോഗിക്കാം.",
   "login.terms": "തുടരുന്നതിലൂടെ SkillPath AI ന്യായമായി ഉപയോഗിക്കാനും അക്കൗണ്ട് സുരക്ഷിതമായി സൂക്ഷിക്കാനും നിങ്ങൾ സമ്മതിക്കുന്നു.",
+  "login.email": "ഇമെയിൽ വിലാസം", "login.sendLink": "സൈൻ-ഇൻ ലിങ്ക് ഇമെയിൽ ചെയ്യുക", "login.sent": "നിങ്ങളുടെ ഇമെയിൽ നോക്കൂ: സൈൻ-ഇൻ ലിങ്ക് അയച്ചിട്ടുണ്ട്", "login.or": "അല്ലെങ്കിൽ",
   "agents.title": "ഏജന്റ് പ്രവർത്തനം", "agents.running": "പ്രവർത്തിക്കുന്നു", "agents.idle": "നിഷ്ക്രിയം",
 };
 
@@ -132,6 +141,7 @@ const es: Messages = {
   "login.continueWith": "Continuar con", "login.failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
   "login.disabled": "El inicio de sesión aún no está configurado en este servidor. Puedes usar el planificador como invitado.",
   "login.terms": "Al continuar aceptas usar SkillPath AI de forma justa y mantener tu cuenta segura.",
+  "login.email": "Correo electrónico", "login.sendLink": "Envíame un enlace de acceso", "login.sent": "Revisa tu correo: enviamos un enlace de acceso a", "login.or": "o",
   "agents.title": "Actividad de los agentes", "agents.running": "En curso", "agents.idle": "Inactivo",
 };
 
@@ -148,6 +158,7 @@ const fr: Messages = {
   "login.continueWith": "Continuer avec", "login.failed": "La connexion a échoué. Veuillez réessayer.",
   "login.disabled": "La connexion n'est pas encore configurée sur ce serveur. Vous pouvez utiliser le planificateur en invité.",
   "login.terms": "En continuant, vous acceptez d'utiliser SkillPath AI de manière loyale et de protéger votre compte.",
+  "login.email": "Adresse e-mail", "login.sendLink": "Recevoir un lien de connexion", "login.sent": "Consultez vos e-mails : lien de connexion envoyé à", "login.or": "ou",
   "agents.title": "Activité des agents", "agents.running": "En cours", "agents.idle": "Inactif",
 };
 
@@ -164,6 +175,7 @@ const de: Messages = {
   "login.continueWith": "Weiter mit", "login.failed": "Die Anmeldung hat nicht geklappt. Bitte versuche es erneut.",
   "login.disabled": "Die Anmeldung ist auf diesem Server noch nicht eingerichtet. Du kannst den Planer als Gast nutzen.",
   "login.terms": "Wenn du fortfährst, nutzt du SkillPath AI fair und hältst dein Konto sicher.",
+  "login.email": "E-Mail-Adresse", "login.sendLink": "Anmeldelink per E-Mail senden", "login.sent": "Prüfe dein Postfach: Anmeldelink gesendet an", "login.or": "oder",
   "agents.title": "Agentenaktivität", "agents.running": "Läuft", "agents.idle": "Bereit",
 };
 
@@ -180,6 +192,7 @@ const pt: Messages = {
   "login.continueWith": "Continuar com", "login.failed": "Não foi possível entrar. Tente novamente.",
   "login.disabled": "O login ainda não está configurado neste servidor. Você pode usar o planejador como convidado.",
   "login.terms": "Ao continuar, você concorda em usar o SkillPath AI de forma justa e manter sua conta segura.",
+  "login.email": "E-mail", "login.sendLink": "Enviar link de acesso", "login.sent": "Verifique seu e-mail: enviamos um link de acesso para", "login.or": "ou",
   "agents.title": "Atividade dos agentes", "agents.running": "Em execução", "agents.idle": "Ocioso",
 };
 
@@ -196,6 +209,7 @@ const ar: Messages = {
   "login.continueWith": "المتابعة باستخدام", "login.failed": "تعذّر تسجيل الدخول. حاول مرة أخرى.",
   "login.disabled": "لم يتم إعداد تسجيل الدخول على هذا الخادم بعد. يمكنك استخدام المخطِّط كزائر.",
   "login.terms": "بالمتابعة، توافق على استخدام SkillPath AI بإنصاف والحفاظ على أمان حسابك.",
+  "login.email": "البريد الإلكتروني", "login.sendLink": "أرسل لي رابط تسجيل الدخول", "login.sent": "تحقق من بريدك: أرسلنا رابط تسجيل الدخول إلى", "login.or": "أو",
   "agents.title": "نشاط الوكلاء", "agents.running": "قيد التشغيل", "agents.idle": "خامل",
 };
 
@@ -212,6 +226,7 @@ const zh: Messages = {
   "login.continueWith": "使用以下方式继续：", "login.failed": "登录失败，请重试。",
   "login.disabled": "此服务器尚未配置登录。你仍可以访客身份使用规划工具。",
   "login.terms": "继续即表示你同意合理使用 SkillPath AI 并妥善保护账号安全。",
+  "login.email": "电子邮箱", "login.sendLink": "发送登录链接到邮箱", "login.sent": "请查看邮箱：登录链接已发送至", "login.or": "或",
   "agents.title": "智能体动态", "agents.running": "运行中", "agents.idle": "空闲",
 };
 

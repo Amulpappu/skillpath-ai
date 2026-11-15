@@ -1,0 +1,47 @@
+# Grows the shared question bank in the cloud, so no laptop has to stay on.
+# Runs every hour (and on demand from the Actions tab). Free for public repositories.
+# Needs two repository secrets: GEMINI_API_KEY and SUPABASE_SERVICE_ROLE_KEY
+# (GitHub → Settings → Secrets and variables → Actions → New repository secret).
+name: Grow question bank
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "Batches to run (each = 2 Gemini calls)"
+        default: "40"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grow-question-bank
+  cancel-in-progress: false
+
+jobs:
+  grow:
+    if: ${{ github.ref == 'refs/heads/v2' || github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://rnsokogscsyjyoupajgg.supabase.co
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Skip quietly until the secrets are added
+        id: check
+        run: |
+          if [ -z "$GEMINI_API_KEY" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "Secrets not set yet; nothing to do."; echo "ready=false" >> "$GITHUB_OUTPUT"
+          else echo "ready=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Run the Question Smith
+        if: steps.check.outputs.ready == 'true'
+        run: npm run bank:grow:ci -- --max-calls ${{ github.event.inputs.max_calls || '40' }}

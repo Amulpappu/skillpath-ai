@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint src tests",
     "test": "vitest run",
-    "bank:grow": "tsx --conditions=react-server --env-file=.env.local scripts/grow-bank.ts"
+    "bank:grow": "tsx --conditions=react-server --env-file=.env.local scripts/grow-bank.ts",
+    "bank:grow:ci": "tsx --conditions=react-server scripts/grow-bank.ts"
   },
   "dependencies": {
     "@google/genai": "^3.3.0",
@@ -21,7 +22,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@tailwindcss/turbopack": "4.3.3",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -186,16 +186,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="border-b border-line bg-card">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-baseline justify-between gap-2 px-4 py-4 sm:px-6">
-          <p className="text-xl font-semibold tracking-tight">
-            SkillPath <span className="text-accent">AI</span>
-          </p>
-          <p className="text-sm text-muted">Five AI agents. One learning path that adapts to you.</p>
-        </div>
-      </header>
-
-      <main id="main" className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+      <div className="mx-auto max-w-6xl">
         <h1 className="mb-1 text-2xl font-semibold tracking-tight sm:text-3xl">Find your skill gaps and close them</h1>
         <p className="mb-6 max-w-2xl text-muted">
           Tell us what you know and where you want to go. The agents compare your skills with the role, build a roadmap, test you
@@ -261,11 +252,9 @@ export default function Home() {
             )}
           </div>
         </div>
-      </main>
+      </div>
 
-      <footer className="mx-auto max-w-6xl px-4 pb-8 text-xs text-muted sm:px-6">
-        Built for PromptWars × Rathinam Technical Campus with the Gemini API. Your profile and progress stay in this browser.
-      </footer>
+      <p className="mx-auto mt-8 max-w-6xl text-xs text-muted">Started at PromptWars × Rathinam Technical Campus. As a guest, your plan stays in this browser.</p>
     </>
   );
 }
