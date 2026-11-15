@@ -34,21 +34,6 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
           onSubmit();
         }}
       >
-        <div>
-          <label htmlFor="name" className={labelClass}>
-            Name
-          </label>
-          <input
-            id="name"
-            className={inputClass}
-            value={profile.name}
-            maxLength={60}
-            required
-            autoComplete="name"
-            onChange={(e) => onChange({ ...profile, name: e.target.value })}
-          />
-        </div>
-
         <fieldset>
           <legend className={labelClass}>Current skills</legend>
           <ul className="space-y-2">
@@ -101,20 +86,7 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
           </Button>
         </fieldset>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label htmlFor="certifications" className={labelClass}>
-              Certifications <span className="font-normal text-muted">(one per line)</span>
-            </label>
-            <textarea
-              id="certifications"
-              rows={3}
-              className={inputClass}
-              value={toLines(profile.certifications)}
-              onChange={(e) => onChange({ ...profile, certifications: fromLines(e.target.value) })}
-            />
-          </div>
-          <div>
+        <div>
             <label htmlFor="projects" className={labelClass}>
               Projects <span className="font-normal text-muted">(one per line)</span>
             </label>
@@ -125,7 +97,6 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
               value={toLines(profile.projects)}
               onChange={(e) => onChange({ ...profile, projects: fromLines(e.target.value) })}
             />
-          </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
