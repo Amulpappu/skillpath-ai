@@ -4,7 +4,8 @@ import { buildMatch, requirementsFromCatalog } from "@/lib/agents/careerMatcher"
 import { buildRoadmap, gapsFrom, insertRemedialStep, remedialDraftFromRules, stepId } from "@/lib/agents/learningPlanner";
 import { mentorFromRules, runAdaptation, runAnalysis } from "@/lib/agents/mentor";
 import { analyseWithRules } from "@/lib/agents/skillAnalyst";
-import { ROLE_REQUIREMENTS } from "@/lib/catalog";
+import { ALL_SKILLS, BASE_ROLES, ROLE_REQUIREMENTS, exerciseFor, resourcesFor } from "@/lib/catalog";
+import { PROGRAMMING_LANGUAGES } from "@/lib/catalogGlobal";
 import type { AgentEvent, QuizResult } from "@/lib/types";
 import { sampleProfile } from "./fixtures";
 
@@ -97,8 +98,8 @@ describe("Learning Planner", () => {
 });
 
 describe("Assessment Agent", () => {
-  it("serves the built-in bank for every core role skill across levels", async () => {
-    const coreSkills = new Set(Object.values(ROLE_REQUIREMENTS).flatMap((r) => r.core));
+  it("serves the built-in bank for every core skill of the original roles across levels", async () => {
+    const coreSkills = new Set(Object.values(BASE_ROLES).flatMap((r) => r.core));
     for (const skill of coreSkills) {
       for (const level of ["beginner", "intermediate", "advanced"] as const) {
         const questions = quizFromBank(skill, level);
@@ -159,5 +160,23 @@ describe("agent pipelines", () => {
     expect(adapted.roadmap.some((s) => s.remedial && s.skill === "JavaScript")).toBe(true);
     expect(adapted.mentor.message).toContain("40%");
     expect([...new Set(events.map((e) => e.agent))]).toEqual(["Assessment Agent", "Learning Planner", "AI Mentor"]);
+  });
+});
+
+describe("Global catalogue (v2)", () => {
+  it("gives every skill of every role at least one https resource and an exercise", () => {
+    const skills = new Set(Object.values(ROLE_REQUIREMENTS).flatMap((r) => [...r.core, ...r.useful]));
+    for (const skill of skills) {
+      expect(ALL_SKILLS, skill).toContain(skill);
+      const resources = resourcesFor(skill);
+      expect(resources.length, skill).toBeGreaterThan(0);
+      for (const r of resources) expect(r.url.startsWith("https://"), `${skill}: ${r.url}`).toBe(true);
+      expect(exerciseFor(skill).length, skill).toBeGreaterThan(10);
+    }
+  });
+
+  it("covers every listed programming language", () => {
+    for (const lang of PROGRAMMING_LANGUAGES) expect(ALL_SKILLS, lang).toContain(lang);
+    expect(Object.keys(ROLE_REQUIREMENTS).length).toBeGreaterThanOrEqual(40);
   });
 });

@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { getT } from "@/lib/i18n/server";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SkillPath AI: personalised learning paths",
+  title: { default: "SkillPath AI: learning, placement and jobs", template: "%s · SkillPath AI" },
   description:
-    "Five collaborating AI agents analyse your skills, match them to a target career, build a learning roadmap and adapt it as you progress.",
+    "Twelve AI agents analyse your skills, plan your learning, test you, prepare you for your dream company and find jobs for your role, in 12 languages.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const { locale, dir } = await getT();
   return (
-    <html lang="en">
+    <html lang={locale} dir={dir}>
       <body className="min-h-screen font-sans antialiased">
         <a
           href="#main"
