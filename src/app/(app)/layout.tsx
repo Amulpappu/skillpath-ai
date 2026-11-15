@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Logo } from "@/components/Logo";
+import { Avatar } from "@/components/Avatar";
 import { getT } from "@/lib/i18n/server";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { currentUser, supabaseServer } from "@/lib/supabase/server";
@@ -19,6 +20,8 @@ const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
   { href: "/jobs", key: "nav.jobs", ready: true },
   { href: "/courses", key: "nav.courses", ready: true },
   { href: "/progress", key: "nav.progress", ready: true },
+  { href: "/people", key: "nav.people", ready: true },
+  { href: "/profile", key: "nav.profile", ready: true },
   { href: "/settings", key: "nav.settings", ready: true },
 ];
 
@@ -27,13 +30,15 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   const user = await currentUser();
   const theme = await getTheme();
   let xp: number | null = null;
+  let avatar: { photo: string | null; choice: string | null } | null = null;
   let name = (user?.user_metadata?.full_name as string | undefined) ?? user?.email ?? "Guest";
   if (user) {
-    const { data: profile } = await (await supabaseServer()).from("profiles").select("full_name, xp, onboarded_at").eq("id", user.id).single();
+    const { data: profile } = await (await supabaseServer()).from("profiles").select("full_name, xp, onboarded_at, avatar_url, avatar_choice").eq("id", user.id).single();
     // New accounts finish the short setup (basic info + tour) before they start learning.
     if (profile && !profile.onboarded_at) redirect("/welcome");
     xp = profile?.xp ?? 0;
     name = profile?.full_name || name;
+    avatar = { photo: profile?.avatar_url ?? null, choice: profile?.avatar_choice ?? null };
   }
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[240px_1fr]">
@@ -54,7 +59,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           <LanguageSwitcher current={locale} label={t("nav.language")} />
           <ThemeToggle initial={theme} />
           {xp !== null && <span title="Your XP is private" className="rounded-full border border-line bg-subtle px-2.5 py-0.5 font-mono text-xs text-accent">★ {xp} XP</span>}
-          <span className="text-sm text-muted">{name}</span>
+          {avatar ? <Link href="/profile" title="Your profile" className="flex items-center gap-2 text-sm text-muted hover:text-ink"><Avatar photo={avatar.photo} choice={avatar.choice} name={name} size={28} /><span className="hidden sm:inline">{name}</span></Link> : <span className="text-sm text-muted">{name}</span>}
           {user && (
             <form action="/auth/signout" method="post">
               <button className="rounded-md border border-line bg-card px-3 py-1.5 text-sm hover:border-ink">{t("nav.signOut")}</button>

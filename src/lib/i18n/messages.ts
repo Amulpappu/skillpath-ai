@@ -11,7 +11,7 @@ const en = {
   "nav.company": "Company prep",
   "nav.jobs": "Jobs",
   "nav.courses": "Free courses",
-  "nav.progress": "Progress",
+  "nav.progress": "Progress", "nav.people": "People", "nav.profile": "Profile", "nav.account": "Account",
   "nav.settings": "Settings",
   "nav.signIn": "Sign in",
   "nav.signOut": "Sign out",
@@ -46,7 +46,7 @@ export type Messages = Record<MessageKey, string>;
 const hi: Messages = {
   "brand.tagline": "आपका करियर, AI एजेंटों द्वारा योजनाबद्ध और अभ्यास से सिद्ध",
   "nav.dashboard": "डैशबोर्ड", "nav.roadmap": "रोडमैप", "nav.practice": "कोडिंग अभ्यास", "nav.assessments": "मूल्यांकन",
-  "nav.company": "कंपनी तैयारी", "nav.jobs": "नौकरियाँ", "nav.courses": "मुफ़्त कोर्स", "nav.progress": "प्रगति",
+  "nav.company": "कंपनी तैयारी", "nav.jobs": "नौकरियाँ", "nav.courses": "मुफ़्त कोर्स", "nav.progress": "प्रगति", "nav.people": "लोग", "nav.profile": "प्रोफ़ाइल", "nav.account": "खाता",
   "nav.settings": "सेटिंग्स", "nav.signIn": "साइन इन", "nav.signOut": "साइन आउट", "nav.language": "भाषा",
   "landing.title": "जहाँ आप हैं, वहाँ से उस नौकरी तक जो आप चाहते हैं",
   "landing.lead": "SkillPath AI आपके कौशल पढ़ता है, दुनिया भर की भूमिकाओं से मिलान करता है, सप्ताह-दर-सप्ताह योजना बनाता है, आपकी परीक्षा लेता है, आपकी पसंदीदा कंपनी की भर्ती के लिए तैयार करता है और आपके लिए खुली नौकरियाँ ढूँढता है।",
@@ -63,7 +63,7 @@ const hi: Messages = {
 const ta: Messages = {
   "brand.tagline": "உங்கள் தொழில், AI முகவர்களால் திட்டமிடப்பட்டு பயிற்சியால் நிரூபிக்கப்படுகிறது",
   "nav.dashboard": "டாஷ்போர்டு", "nav.roadmap": "கற்றல் வரைபடம்", "nav.practice": "கோடிங் பயிற்சி", "nav.assessments": "மதிப்பீடுகள்",
-  "nav.company": "நிறுவனத் தயாரிப்பு", "nav.jobs": "வேலைகள்", "nav.courses": "இலவச படிப்புகள்", "nav.progress": "முன்னேற்றம்",
+  "nav.company": "நிறுவனத் தயாரிப்பு", "nav.jobs": "வேலைகள்", "nav.courses": "இலவச படிப்புகள்", "nav.progress": "முன்னேற்றம்", "nav.people": "நபர்கள்", "nav.profile": "சுயவிவரம்", "nav.account": "கணக்கு",
   "nav.settings": "அமைப்புகள்", "nav.signIn": "உள்நுழை", "nav.signOut": "வெளியேறு", "nav.language": "மொழி",
   "landing.title": "நீங்கள் இருக்கும் இடத்திலிருந்து நீங்கள் விரும்பும் வேலை வரை",
   "landing.lead": "SkillPath AI உங்கள் திறன்களைப் படிக்கிறது, உலகளாவிய பணிகளுடன் பொருத்துகிறது, வாரந்தோறும் திட்டம் தயாரிக்கிறது, உங்களைச் சோதிக்கிறது, உங்கள் கனவு நிறுவனத்தின் தேர்வுச் சுற்றுகளுக்குத் தயார்படுத்துகிறது, உங்களுக்கான வேலைகளைக் கண்டறிகிறது.",
@@ -80,7 +80,7 @@ const ta: Messages = {
 const te: Messages = {
   "brand.tagline": "మీ కెరీర్, AI ఏజెంట్లు ప్లాన్ చేసి సాధనతో నిరూపించినది",
   "nav.dashboard": "డాష్‌బోర్డ్", "nav.roadmap": "రోడ్‌మ్యాప్", "nav.practice": "కోడింగ్ సాధన", "nav.assessments": "అంచనాలు",
-  "nav.company": "కంపెనీ సన్నద్ధత", "nav.jobs": "ఉద్యోగాలు", "nav.courses": "ఉచిత కోర్సులు", "nav.progress": "పురోగతి",
+  "nav.company": "కంపెనీ సన్నద్ధత", "nav.jobs": "ఉద్యోగాలు", "nav.courses": "ఉచిత కోర్సులు", "nav.progress": "పురోగతి", "nav.people": "వ్యక్తులు", "nav.profile": "ప్రొఫైల్", "nav.account": "ఖాతా",
   "nav.settings": "సెట్టింగ్‌లు", "nav.signIn": "సైన్ ఇన్", "nav.signOut": "సైన్ అవుట్", "nav.language": "భాష",
   "landing.title": "మీరు ఉన్న చోటు నుండి మీకు కావలసిన ఉద్యోగం వరకు",
   "landing.lead": "SkillPath AI మీ నైపుణ్యాలను చదివి, ప్రపంచవ్యాప్త పాత్రలతో సరిపోల్చి, వారం వారీ ప్రణాళిక రూపొందించి, మిమ్మల్ని పరీక్షించి, మీ కలల కంపెనీ నియామక రౌండ్లకు సిద్ధం చేసి, మీ కోసం ఖాళీ ఉద్యోగాలను కనుగొంటుంది.",
@@ -97,7 +97,7 @@ const te: Messages = {
 const kn: Messages = {
   "brand.tagline": "ನಿಮ್ಮ ವೃತ್ತಿ, AI ಏಜೆಂಟ್‌ಗಳು ಯೋಜಿಸಿ ಅಭ್ಯಾಸದಿಂದ ಸಾಬೀತುಪಡಿಸಿದ್ದು",
   "nav.dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", "nav.roadmap": "ರೋಡ್‌ಮ್ಯಾಪ್", "nav.practice": "ಕೋಡಿಂಗ್ ಅಭ್ಯಾಸ", "nav.assessments": "ಮೌಲ್ಯಮಾಪನಗಳು",
-  "nav.company": "ಕಂಪನಿ ತಯಾರಿ", "nav.jobs": "ಉದ್ಯೋಗಗಳು", "nav.courses": "ಉಚಿತ ಕೋರ್ಸ್‌ಗಳು", "nav.progress": "ಪ್ರಗತಿ",
+  "nav.company": "ಕಂಪನಿ ತಯಾರಿ", "nav.jobs": "ಉದ್ಯೋಗಗಳು", "nav.courses": "ಉಚಿತ ಕೋರ್ಸ್‌ಗಳು", "nav.progress": "ಪ್ರಗತಿ", "nav.people": "ಜನರು", "nav.profile": "ಪ್ರೊಫೈಲ್", "nav.account": "ಖಾತೆ",
   "nav.settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", "nav.signIn": "ಸೈನ್ ಇನ್", "nav.signOut": "ಸೈನ್ ಔಟ್", "nav.language": "ಭಾಷೆ",
   "landing.title": "ನೀವು ಇರುವಲ್ಲಿಂದ ನೀವು ಬಯಸುವ ಉದ್ಯೋಗದವರೆಗೆ",
   "landing.lead": "SkillPath AI ನಿಮ್ಮ ಕೌಶಲಗಳನ್ನು ಓದಿ, ಜಾಗತಿಕ ಹುದ್ದೆಗಳಿಗೆ ಹೊಂದಿಸಿ, ವಾರವಾರು ಯೋಜನೆ ರೂಪಿಸಿ, ನಿಮ್ಮನ್ನು ಪರೀಕ್ಷಿಸಿ, ನಿಮ್ಮ ಕನಸಿನ ಕಂಪನಿಯ ನೇಮಕಾತಿ ಸುತ್ತುಗಳಿಗೆ ಸಿದ್ಧಪಡಿಸಿ, ನಿಮಗಾಗಿ ಖಾಲಿ ಉದ್ಯೋಗಗಳನ್ನು ಹುಡುಕುತ್ತದೆ.",
@@ -114,7 +114,7 @@ const kn: Messages = {
 const ml: Messages = {
   "brand.tagline": "നിങ്ങളുടെ കരിയർ, AI ഏജന്റുകൾ ആസൂത്രണം ചെയ്ത് പരിശീലനത്തിലൂടെ തെളിയിച്ചത്",
   "nav.dashboard": "ഡാഷ്‌ബോർഡ്", "nav.roadmap": "റോഡ്‌മാപ്പ്", "nav.practice": "കോഡിംഗ് പരിശീലനം", "nav.assessments": "വിലയിരുത്തലുകൾ",
-  "nav.company": "കമ്പനി തയ്യാറെടുപ്പ്", "nav.jobs": "ജോലികൾ", "nav.courses": "സൗജന്യ കോഴ്സുകൾ", "nav.progress": "പുരോഗതി",
+  "nav.company": "കമ്പനി തയ്യാറെടുപ്പ്", "nav.jobs": "ജോലികൾ", "nav.courses": "സൗജന്യ കോഴ്സുകൾ", "nav.progress": "പുരോഗതി", "nav.people": "ആളുകൾ", "nav.profile": "പ്രൊഫൈൽ", "nav.account": "അക്കൗണ്ട്",
   "nav.settings": "ക്രമീകരണങ്ങൾ", "nav.signIn": "സൈൻ ഇൻ", "nav.signOut": "സൈൻ ഔട്ട്", "nav.language": "ഭാഷ",
   "landing.title": "നിങ്ങൾ ഇപ്പോൾ ഉള്ളിടത്ത് നിന്ന് നിങ്ങൾ ആഗ്രഹിക്കുന്ന ജോലിയിലേക്ക്",
   "landing.lead": "SkillPath AI നിങ്ങളുടെ കഴിവുകൾ വായിച്ച്, ലോകമെമ്പാടുമുള്ള റോളുകളുമായി പൊരുത്തപ്പെടുത്തി, ആഴ്ചതോറുമുള്ള പദ്ധതി തയ്യാറാക്കി, നിങ്ങളെ പരീക്ഷിച്ച്, സ്വപ്ന കമ്പനിയുടെ റിക്രൂട്ട്മെന്റ് റൗണ്ടുകൾക്ക് ഒരുക്കി, നിങ്ങൾക്കായി ഒഴിവുള്ള ജോലികൾ കണ്ടെത്തുന്നു.",
@@ -131,7 +131,7 @@ const ml: Messages = {
 const es: Messages = {
   "brand.tagline": "Tu carrera, planificada por agentes de IA y demostrada con práctica",
   "nav.dashboard": "Panel", "nav.roadmap": "Ruta", "nav.practice": "Práctica de código", "nav.assessments": "Evaluaciones",
-  "nav.company": "Preparación por empresa", "nav.jobs": "Empleos", "nav.courses": "Cursos gratuitos", "nav.progress": "Progreso",
+  "nav.company": "Preparación por empresa", "nav.jobs": "Empleos", "nav.courses": "Cursos gratuitos", "nav.progress": "Progreso", "nav.people": "Personas", "nav.profile": "Perfil", "nav.account": "Cuenta",
   "nav.settings": "Ajustes", "nav.signIn": "Iniciar sesión", "nav.signOut": "Cerrar sesión", "nav.language": "Idioma",
   "landing.title": "De donde estás al trabajo que quieres",
   "landing.lead": "SkillPath AI analiza tus habilidades, te compara con puestos de todo el mundo, crea un plan semana a semana, te evalúa, te prepara para los procesos de selección de la empresa de tus sueños y encuentra empleos abiertos para ti.",
@@ -148,7 +148,7 @@ const es: Messages = {
 const fr: Messages = {
   "brand.tagline": "Votre carrière, planifiée par des agents IA et prouvée par la pratique",
   "nav.dashboard": "Tableau de bord", "nav.roadmap": "Parcours", "nav.practice": "Pratique du code", "nav.assessments": "Évaluations",
-  "nav.company": "Préparation entreprise", "nav.jobs": "Offres d'emploi", "nav.courses": "Cours gratuits", "nav.progress": "Progression",
+  "nav.company": "Préparation entreprise", "nav.jobs": "Offres d'emploi", "nav.courses": "Cours gratuits", "nav.progress": "Progression", "nav.people": "Personnes", "nav.profile": "Profil", "nav.account": "Compte",
   "nav.settings": "Paramètres", "nav.signIn": "Se connecter", "nav.signOut": "Se déconnecter", "nav.language": "Langue",
   "landing.title": "De là où vous êtes jusqu'au poste que vous visez",
   "landing.lead": "SkillPath AI analyse vos compétences, vous associe à des métiers dans le monde entier, construit un plan semaine par semaine, vous évalue, vous prépare aux recrutements de l'entreprise de vos rêves et trouve des offres pour vous.",
@@ -165,7 +165,7 @@ const fr: Messages = {
 const de: Messages = {
   "brand.tagline": "Deine Karriere, von KI-Agenten geplant und durch Übung bewiesen",
   "nav.dashboard": "Übersicht", "nav.roadmap": "Lernpfad", "nav.practice": "Programmierübungen", "nav.assessments": "Tests",
-  "nav.company": "Firmenvorbereitung", "nav.jobs": "Jobs", "nav.courses": "Kostenlose Kurse", "nav.progress": "Fortschritt",
+  "nav.company": "Firmenvorbereitung", "nav.jobs": "Jobs", "nav.courses": "Kostenlose Kurse", "nav.progress": "Fortschritt", "nav.people": "Personen", "nav.profile": "Profil", "nav.account": "Konto",
   "nav.settings": "Einstellungen", "nav.signIn": "Anmelden", "nav.signOut": "Abmelden", "nav.language": "Sprache",
   "landing.title": "Von deinem Stand zum Job, den du willst",
   "landing.lead": "SkillPath AI liest deine Fähigkeiten, gleicht sie mit Rollen weltweit ab, erstellt einen Wochenplan, prüft dich, bereitet dich auf die Auswahlrunden deiner Wunschfirma vor und findet offene Stellen für dich.",
@@ -182,7 +182,7 @@ const de: Messages = {
 const pt: Messages = {
   "brand.tagline": "Sua carreira, planejada por agentes de IA e comprovada na prática",
   "nav.dashboard": "Painel", "nav.roadmap": "Trilha", "nav.practice": "Prática de código", "nav.assessments": "Avaliações",
-  "nav.company": "Preparação por empresa", "nav.jobs": "Vagas", "nav.courses": "Cursos gratuitos", "nav.progress": "Progresso",
+  "nav.company": "Preparação por empresa", "nav.jobs": "Vagas", "nav.courses": "Cursos gratuitos", "nav.progress": "Progresso", "nav.people": "Pessoas", "nav.profile": "Perfil", "nav.account": "Conta",
   "nav.settings": "Configurações", "nav.signIn": "Entrar", "nav.signOut": "Sair", "nav.language": "Idioma",
   "landing.title": "De onde você está até o emprego que você quer",
   "landing.lead": "O SkillPath AI lê suas habilidades, combina você com cargos no mundo todo, monta um plano semana a semana, avalia você, prepara para as etapas de seleção da empresa dos seus sonhos e encontra vagas abertas para você.",
@@ -199,7 +199,7 @@ const pt: Messages = {
 const ar: Messages = {
   "brand.tagline": "مسيرتك المهنية، يخطّطها وكلاء الذكاء الاصطناعي وتثبتها الممارسة",
   "nav.dashboard": "لوحة التحكم", "nav.roadmap": "خطة التعلّم", "nav.practice": "تمارين البرمجة", "nav.assessments": "الاختبارات",
-  "nav.company": "التحضير للشركات", "nav.jobs": "الوظائف", "nav.courses": "دورات مجانية", "nav.progress": "التقدّم",
+  "nav.company": "التحضير للشركات", "nav.jobs": "الوظائف", "nav.courses": "دورات مجانية", "nav.progress": "التقدّم", "nav.people": "الأشخاص", "nav.profile": "الملف الشخصي", "nav.account": "الحساب",
   "nav.settings": "الإعدادات", "nav.signIn": "تسجيل الدخول", "nav.signOut": "تسجيل الخروج", "nav.language": "اللغة",
   "landing.title": "من حيث أنت إلى الوظيفة التي تريدها",
   "landing.lead": "يقرأ SkillPath AI مهاراتك، ويطابقك مع وظائف حول العالم، ويبني خطة أسبوعية، ويختبرك، ويجهّزك لمراحل التوظيف في شركة أحلامك، ويجد لك وظائف متاحة.",
@@ -216,7 +216,7 @@ const ar: Messages = {
 const zh: Messages = {
   "brand.tagline": "你的职业规划，由 AI 智能体制定，用练习来验证",
   "nav.dashboard": "概览", "nav.roadmap": "学习路线", "nav.practice": "编程练习", "nav.assessments": "测评",
-  "nav.company": "企业备考", "nav.jobs": "职位", "nav.courses": "免费课程", "nav.progress": "进度",
+  "nav.company": "企业备考", "nav.jobs": "职位", "nav.courses": "免费课程", "nav.progress": "进度", "nav.people": "用户", "nav.profile": "个人资料", "nav.account": "账户",
   "nav.settings": "设置", "nav.signIn": "登录", "nav.signOut": "退出登录", "nav.language": "语言",
   "landing.title": "从现在的你，到你想要的工作",
   "landing.lead": "SkillPath AI 分析你的技能，匹配全球职位，制定每周计划，进行测评，帮你准备梦想公司的招聘环节，并为你寻找在招职位。",

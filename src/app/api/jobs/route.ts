@@ -1,17 +1,19 @@
-import { z } from "zod";
-import { ROLES } from "@/lib/catalog";
-import { COUNTRIES, jobSiteLinks, liveJobs } from "@/lib/jobs/scout";
-import { allowRequest, clientKey } from "@/lib/rateLimit";
+import { jobPostSchema } from "@/lib/jobs/board";
+import { parseRequest } from "@/lib/request";
 import { jsonError } from "@/lib/stream";
+import { currentUser, supabaseServer } from "@/lib/supabase/server";
 
-const query = z.object({ role: z.string().refine((r) => ROLES.includes(r)), country: z.string().refine((c) => COUNTRIES.some((x) => x.code === c)).default("IN") });
-
-/** Job Scout: live listings from free feeds + job-site searches for a role and country. */
-export async function GET(request: Request): Promise<Response> {
-  if (!allowRequest(clientKey(request), 20)) return jsonError("Too many requests. Please wait a minute.", 429);
-  const parsed = query.safeParse(Object.fromEntries(new URL(request.url).searchParams));
-  if (!parsed.success) return jsonError("Pick a role from the list.", 400);
-  const { role, country } = parsed.data;
-  const jobs = await liveJobs(role);
-  return Response.json({ role, country, jobs, sites: jobSiteLinks(role, country) }, { headers: { "Cache-Control": "public, max-age=600" } });
+/** Post a job opening. */
+export async function POST(request: Request): Promise<Response> {
+  const parsed = await parseRequest(request, jobPostSchema, 10);
+  if (!parsed.ok) return parsed.response;
+  const user = await currentUser();
+  if (!user) return jsonError("Please sign in first.", 401);
+  const d = parsed.data;
+  const { data, error } = await (await supabaseServer()).from("job_posts").insert({
+    poster_id: user.id, title: d.title, company: d.company, location: d.location, work_mode: d.work_mode, job_type: d.job_type,
+    description: d.description, skills: d.skills, apply_url: d.apply_url || null, apply_by: d.apply_by || null,
+  }).select("id").single();
+  if (error || !data) return jsonError("Could not post the job. Please check the fields.", 400);
+  return Response.json({ id: data.id });
 }
