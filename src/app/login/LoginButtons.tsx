@@ -23,7 +23,12 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
     // Clear any old, broken session in this browser first so it can't wipe the new sign-in midway.
     await supabase.auth.signOut({ scope: "local" }).catch(() => undefined);
     const { error } = await supabase.auth.signInWithOAuth({
-      provider, options: { redirectTo: redirectTo(), scopes: provider === "azure" ? "email openid profile" : undefined },
+      provider, options: {
+        redirectTo: redirectTo(),
+        scopes: provider === "azure" ? "email openid profile" : undefined,
+        // Always show the account picker instead of silently reusing the last account.
+        queryParams: { prompt: "select_account" },
+      },
     });
     if (error) { setError(true); setBusy(null); }
   }
