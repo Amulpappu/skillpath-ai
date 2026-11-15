@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { getT } from "@/lib/i18n/server";
+import { getTheme } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const { locale, dir } = await getT();
+  const theme = await getTheme();
   return (
-    <html lang={locale} dir={dir}>
+    <html lang={locale} dir={dir} data-theme={theme === "system" ? undefined : theme} suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased">
         <a
           href="#main"

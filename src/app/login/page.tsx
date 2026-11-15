@@ -26,7 +26,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           {authEnabled() ? (
             <LoginButtons next={safeNext} providers={providers} labels={{ continueWith: t("login.continueWith"), failed: t("login.failed"), email: t("login.email"), sendLink: t("login.sendLink"), sent: t("login.sent"), or: t("login.or") }} />
           ) : (
-            <p className="rounded-lg border border-warn bg-warn-soft p-4 text-sm text-warn">{t("login.disabled")}</p>
+            <p className="rounded-md border border-warn bg-warn-soft p-4 text-sm text-warn">{t("login.disabled")}</p>
           )}
           {error && <p role="alert" className="mt-4 text-sm text-bad">{t("login.failed")}{reason ? ` (${reason.slice(0, 120)})` : ""}</p>}
         </div>

@@ -41,7 +41,7 @@ function Finish() {
       {failed ? (
         <div className="max-w-sm text-center">
           <p role="alert" className="text-bad">{failed}</p>
-          <a href="/login" className="mt-4 inline-block rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-ink">Back to sign in</a>
+          <a href="/login" className="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover">Back to sign in</a>
         </div>
       ) : (
         <p role="status" className="text-muted">Signing you in…</p>

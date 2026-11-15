@@ -10,7 +10,7 @@ export function RichText({ text, className = "" }: { text: string; className?: s
     <span className={className}>
       {parts.map((part, i) =>
         i % 2 === 1 ? (
-          <pre key={i} className="my-2 overflow-x-auto rounded-lg bg-ink px-3 py-2 font-mono text-[13px] leading-relaxed text-paper"><code>{part.replace(/\n$/, "")}</code></pre>
+          <pre key={i} className="my-2 overflow-x-auto rounded-md border border-line bg-subtle px-3 py-2 font-mono text-[13px] leading-relaxed text-ink"><code>{part.replace(/\n$/, "")}</code></pre>
         ) : (
           <Fragment key={i}>{inline(part)}</Fragment>
         ),

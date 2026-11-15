@@ -44,7 +44,7 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
   }
 
   if (sentTo) {
-    return <p role="status" className="rounded-lg border border-accent bg-accent-soft p-4 text-sm text-accent">{labels.sent} <b>{sentTo}</b>.</p>;
+    return <p role="status" className="rounded-md border border-accent bg-accent-soft p-4 text-sm text-accent">{labels.sent} <b>{sentTo}</b>.</p>;
   }
 
   return (
@@ -52,9 +52,9 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
       <form onSubmit={emailLink} className="space-y-3">
         <label className="block text-sm font-medium">{labels.email}
           <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-line bg-white px-3 py-2.5 text-[15px]" />
+            className="mt-1 w-full rounded-md border border-line bg-card px-3 py-2.5 text-[15px]" />
         </label>
-        <button disabled={busy !== null} className="w-full rounded-lg bg-accent px-4 py-3 text-[15px] font-medium text-white hover:bg-ink disabled:opacity-60">
+        <button disabled={busy !== null} className="w-full rounded-md bg-accent px-4 py-3 text-[15px] font-medium text-white hover:bg-accent-hover disabled:opacity-60">
           {busy === "email" ? "…" : labels.sendLink}
         </button>
       </form>
@@ -63,7 +63,7 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
           <p className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted"><span className="h-px flex-1 bg-line" />{labels.or}<span className="h-px flex-1 bg-line" /></p>
           {providers.map((p) => (
             <button key={p.id} type="button" onClick={() => oauth(p.id)} disabled={busy !== null}
-              className="flex w-full items-center justify-center gap-3 rounded-lg border border-line bg-white px-4 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:opacity-60">
+              className="flex w-full items-center justify-center gap-3 rounded-md border border-line bg-card px-4 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:opacity-60">
               {p.logo && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={`/logos/${p.id}.svg`} alt="" className="h-5 w-5" />

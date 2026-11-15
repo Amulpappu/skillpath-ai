@@ -18,7 +18,7 @@ interface Props {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-line bg-white p-3">
+    <div className="rounded-md border border-line bg-card p-3">
       <dt className="text-xs uppercase tracking-wide text-muted">{label}</dt>
       <dd className="mt-1 text-xl font-semibold tabular-nums">{value}</dd>
     </div>
@@ -66,7 +66,7 @@ export function ProgressCard({ completed, total, startPercent, livePercent, scor
 
 export function MentorCard({ mentor }: { mentor: MentorNote }) {
   return (
-    <section aria-labelledby="mentor-heading" aria-live="polite" className="rounded-xl bg-ink p-5 text-white sm:p-6">
+    <section aria-labelledby="mentor-heading" aria-live="polite" className="rounded-md bg-inverse p-5 text-on-inverse sm:p-6">
       <h2 id="mentor-heading" className="mb-2 text-sm font-semibold uppercase tracking-wide text-accent-soft">
         AI Mentor
       </h2>

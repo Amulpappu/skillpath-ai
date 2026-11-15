@@ -194,7 +194,7 @@ export default function Home() {
         </p>
 
         {error && (
-          <div role="alert" className="mb-4 rounded-lg border border-bad bg-bad-soft px-4 py-3 text-sm text-bad">
+          <div role="alert" className="mb-4 rounded-md border border-bad bg-bad-soft px-4 py-3 text-sm text-bad">
             {error}
           </div>
         )}
@@ -240,7 +240,7 @@ export default function Home() {
                 />
               </>
             ) : (
-              <section aria-labelledby="empty-heading" className="rounded-xl border border-dashed border-line p-8 text-center">
+              <section aria-labelledby="empty-heading" className="rounded-md border border-dashed border-line p-8 text-center">
                 <h2 id="empty-heading" className="text-lg font-semibold">
                   Your plan will appear here
                 </h2>

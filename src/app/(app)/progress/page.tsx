@@ -17,7 +17,7 @@ export default async function ProgressPage() {
       <div className="mx-auto max-w-3xl">
         <h1 className="text-2xl font-semibold tracking-tight">Progress</h1>
         <p className="mt-2 text-muted">Sign in to see your Placement Readiness score. It combines your quiz results, coding practice, aptitude and English tests and profile into one number out of 100.</p>
-        <Link href="/login?next=/progress" className="mt-4 inline-block rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-ink">Sign in</Link>
+        <Link href="/login?next=/progress" className="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover">Sign in</Link>
       </div>
     );
   }
@@ -46,7 +46,7 @@ export default async function ProgressPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="text-2xl font-semibold tracking-tight">Progress</h1>
-      <section className="mt-6 grid gap-6 rounded-xl border border-line bg-card p-6 sm:grid-cols-[200px_1fr]">
+      <section className="mt-6 grid gap-6 rounded-md border border-line bg-card p-6 sm:grid-cols-[200px_1fr]">
         <div>
           <p className="text-sm text-muted">Placement readiness</p>
           <p className="text-6xl font-semibold tabular-nums tracking-tight">{r.score}</p>
@@ -61,7 +61,7 @@ export default async function ProgressPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 rounded-lg bg-paper p-3 text-sm"><span className="font-semibold">AI Mentor: </span>{r.advice}</p>
+          <p className="mt-4 rounded-md bg-paper p-3 text-sm"><span className="font-semibold">AI Mentor: </span>{r.advice}</p>
         </div>
       </section>
       {!role && <p className="mt-4 text-sm text-muted">Set a target role in your plan so core-skill quizzes count towards the score.</p>}

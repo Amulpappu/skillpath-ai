@@ -22,13 +22,13 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
       <h1 className="text-2xl font-semibold tracking-tight">Free courses and labs</h1>
       <p className="mt-1 text-muted">Every skill follows Learn → Try it in a lab → Practise → Quiz. All free. Catalogue reviewed {CATALOG_REVIEWED}.</p>
       <div className="mt-6 grid gap-6 lg:grid-cols-[260px_1fr]">
-        <nav aria-label="Skills" className="max-h-[70vh] overflow-y-auto rounded-xl border border-line bg-card p-3">
+        <nav aria-label="Skills" className="max-h-[70vh] overflow-y-auto rounded-md border border-line bg-card p-3">
           {groups.map((g) => (
             <div key={g.label} className="mb-3">
               <p className="px-2 pb-1 font-mono text-[11px] uppercase tracking-wider text-muted">{g.label}</p>
               {g.skills.map((x) => (
                 <a key={x} href={`/courses?s=${encodeURIComponent(x)}`} aria-current={x === skill ? "page" : undefined}
-                  className={`block rounded-md px-2 py-1.5 text-sm ${x === skill ? "bg-ink text-white" : "hover:bg-paper"}`}>{x}</a>
+                  className={`block rounded-md px-2 py-1.5 text-sm ${x === skill ? "bg-inverse text-on-inverse" : "hover:bg-subtle"}`}>{x}</a>
               ))}
             </div>
           ))}
@@ -36,23 +36,23 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">{skill}</h2>
           {steps.map((st) => (
-            <section key={st.n} className="rounded-xl border border-line bg-card p-5">
+            <section key={st.n} className="rounded-md border border-line bg-card p-5">
               <p className="font-mono text-xs text-muted">STEP {st.n}</p>
               <h3 className="font-semibold">{st.title}</h3><p className="text-sm text-muted">{st.body}</p>
               <ul className="mt-3 space-y-3">
                 {st.items.map((it) => (
-                  <li key={it.url}><a href={it.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">{it.title}</a><span className="block text-sm text-muted">{it.sub}</span></li>
+                  <li key={it.url}><a href={it.url} target="_blank" rel="noopener noreferrer" className="font-medium text-link hover:underline">{it.title}</a><span className="block text-sm text-muted">{it.sub}</span></li>
                 ))}
               </ul>
             </section>
           ))}
-          <section className="rounded-xl border border-line bg-card p-5">
+          <section className="rounded-md border border-line bg-card p-5">
             <p className="font-mono text-xs text-muted">STEP 3 AND 4</p>
             <h3 className="font-semibold">Practise, then prove it</h3>
             <p className="mt-1 text-sm">{exerciseFor(skill)}</p>
             <div className="mt-3 flex gap-2">
-              <a href="/practice" className="rounded-lg border border-line bg-white px-3 py-1.5 text-sm hover:border-ink">Coding practice</a>
-              <a href="/assessments" className="rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-ink">Take the {skill} quiz</a>
+              <a href="/practice" className="rounded-md border border-line bg-card px-3 py-1.5 text-sm hover:border-ink">Coding practice</a>
+              <a href="/assessments" className="rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-accent-hover">Take the {skill} quiz</a>
             </div>
           </section>
         </div>

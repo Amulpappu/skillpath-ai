@@ -14,7 +14,7 @@ const HANDLES: { key: keyof Settings; label: string; profile: (h: string) => str
   { key: "codechef_handle", label: "CodeChef", profile: (h) => `https://www.codechef.com/users/${h}` },
   { key: "hackerrank_handle", label: "HackerRank", profile: (h) => `https://www.hackerrank.com/profile/${h}` },
 ];
-const input = "mt-1 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm";
+const input = "mt-1 w-full rounded-md border border-line bg-card px-3 py-2 text-sm";
 
 export function SettingsForm({ roles, companies, countries }: { roles: string[]; companies: string[]; countries: { code: string; name: string }[] }) {
   const [s, setS] = useState<Settings>(EMPTY);
@@ -50,7 +50,7 @@ export function SettingsForm({ roles, companies, countries }: { roles: string[];
 
   return (
     <form onSubmit={save} className="space-y-6">
-      <section className="grid gap-4 rounded-xl border border-line bg-card p-5 sm:grid-cols-2">
+      <section className="grid gap-4 rounded-md border border-line bg-card p-5 sm:grid-cols-2">
         <h2 className="font-semibold sm:col-span-2">About you</h2>
         <label className="text-sm font-medium">Name<input value={s.full_name} onChange={(e) => set("full_name", e.target.value)} maxLength={80} className={input} /></label>
         <label className="text-sm font-medium">Country (for jobs)
@@ -66,20 +66,20 @@ export function SettingsForm({ roles, companies, countries }: { roles: string[];
         </label>
       </section>
 
-      <section className="rounded-xl border border-line bg-card p-5">
+      <section className="rounded-md border border-line bg-card p-5">
         <h2 className="font-semibold">Dream companies <span className="text-sm font-normal text-muted">(up to 5)</span></h2>
         <div className="mt-3 flex flex-wrap gap-2">
           {companies.map((c) => {
             const on = s.dream_companies.includes(c);
             return (
               <button key={c} type="button" aria-pressed={on} onClick={() => set("dream_companies", on ? s.dream_companies.filter((x) => x !== c) : s.dream_companies.length < 5 ? [...s.dream_companies, c] : s.dream_companies)}
-                className={`rounded-full border px-3 py-1.5 text-sm ${on ? "border-ink bg-ink text-white" : "border-line bg-white hover:border-ink"}`}>{c}</button>
+                className={`rounded-full border px-3 py-1.5 text-sm ${on ? "border-inverse bg-inverse text-on-inverse" : "border-line bg-card hover:border-ink"}`}>{c}</button>
             );
           })}
         </div>
       </section>
 
-      <section className="rounded-xl border border-line bg-card p-5">
+      <section className="rounded-md border border-line bg-card p-5">
         <h2 className="font-semibold">Interests</h2>
         <p className="mt-1 text-sm text-muted">The Learning Planner uses these to pick examples and projects you will enjoy.</p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -91,25 +91,25 @@ export function SettingsForm({ roles, companies, countries }: { roles: string[];
         <div className="mt-3 flex gap-2">
           <input value={interest} onChange={(e) => setInterest(e.target.value)} maxLength={40} placeholder="e.g. cyber security, games, finance" className={`${input} mt-0`} aria-label="Add an interest" />
           <button type="button" onClick={() => { const v = interest.trim(); if (v && !s.interests.includes(v) && s.interests.length < 10) set("interests", [...s.interests, v]); setInterest(""); }}
-            className="rounded-lg border border-line bg-white px-4 text-sm hover:border-ink">Add</button>
+            className="rounded-md border border-line bg-card px-4 text-sm hover:border-ink">Add</button>
         </div>
       </section>
 
-      <section className="grid gap-4 rounded-xl border border-line bg-card p-5 sm:grid-cols-2">
+      <section className="grid gap-4 rounded-md border border-line bg-card p-5 sm:grid-cols-2">
         <h2 className="font-semibold sm:col-span-2">Coding profiles</h2>
         {HANDLES.map((h) => {
           const v = s[h.key] as string;
           return (
             <label key={h.key} className="text-sm font-medium">{h.label} username
               <input value={v} onChange={(e) => set(h.key, e.target.value.replace(/[^A-Za-z0-9_.-]/g, "") as never)} maxLength={40} className={input} />
-              {v && <a href={h.profile(v)} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-accent underline underline-offset-2">Open your {h.label} profile</a>}
+              {v && <a href={h.profile(v)} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-link hover:underline">Open your {h.label} profile</a>}
             </label>
           );
         })}
       </section>
 
       <div className="flex items-center gap-3">
-        <button disabled={state === "saving"} className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-ink disabled:opacity-60">Save settings</button>
+        <button disabled={state === "saving"} className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent-hover disabled:opacity-60">Save settings</button>
         <span role="status" className="text-sm text-muted">
           {state === "saved" ? (account ? "Saved to your account." : "Saved in this browser.") : state === "error" ? "Could not save. Please try again." : account === false ? "Guest mode: settings are kept in this browser." : ""}
         </span>

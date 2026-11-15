@@ -23,7 +23,7 @@ export function Roadmap({ roadmap, isDone, levelFor, onQuizGraded, onMarkDone, b
         {roadmap.map((step) => {
           const done = isDone(step);
           return (
-            <li key={step.id} className={`rounded-lg border p-4 ${step.remedial ? "border-warn bg-warn-soft/40" : "border-line bg-white"}`}>
+            <li key={step.id} className={`rounded-md border p-4 ${step.remedial ? "border-warn bg-warn-soft/40" : "border-line bg-card"}`}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-semibold">
                   <span className="mr-2 font-mono text-xs text-muted">WEEK {step.week}</span>
@@ -38,7 +38,7 @@ export function Roadmap({ roadmap, isDone, levelFor, onQuizGraded, onMarkDone, b
                 {step.resources.map((resource) => (
                   <li key={resource.url}>
                     <span className="mr-2 inline-block w-16 text-xs uppercase tracking-wide text-muted">{resource.type}</span>
-                    <a href={resource.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
+                    <a href={resource.url} target="_blank" rel="noopener noreferrer" className="font-medium text-link hover:underline">
                       {resource.title}
                       <span className="sr-only"> (opens in a new tab)</span>
                     </a>

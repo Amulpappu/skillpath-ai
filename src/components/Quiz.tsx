@@ -38,7 +38,7 @@ export function Quiz({ skill, level, onGraded, onClose }: Props) {
 
   if (error) {
     return (
-      <div role="alert" className="mt-4 rounded-lg bg-bad-soft p-3 text-sm text-bad">
+      <div role="alert" className="mt-4 rounded-md bg-bad-soft p-3 text-sm text-bad">
         {error}{" "}
         <button type="button" className="underline" onClick={onClose}>
           Close
