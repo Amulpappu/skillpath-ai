@@ -31,7 +31,6 @@ export default async function Landing() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{t("landing.lead")}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link href="/login" className="rounded-lg bg-accent px-6 py-3 font-medium text-white hover:bg-ink">{t("landing.cta")}</Link>
-            <Link href="/plan" className="rounded-lg border border-line bg-card px-6 py-3 font-medium hover:border-ink">{t("landing.guest")}</Link>
           </div>
           <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
             {stats.map((s) => (

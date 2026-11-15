@@ -10,7 +10,7 @@ type Labels = { continueWith: string; failed: string; email: string; sendLink: s
  * Email sign-in (a one-time link, built into Supabase) plus any OAuth providers that are switched on.
  * If an official sign-in mark is placed at /public/logos/<provider>.svg it is shown on that button.
  */
-export function LoginButtons({ next, labels, providers }: { next: string; labels: Labels; providers: { id: ProviderId; label: string }[] }) {
+export function LoginButtons({ next, labels, providers }: { next: string; labels: Labels; providers: { id: ProviderId; label: string; logo?: boolean }[] }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -54,8 +54,10 @@ export function LoginButtons({ next, labels, providers }: { next: string; labels
           {providers.map((p) => (
             <button key={p.id} type="button" onClick={() => oauth(p.id)} disabled={busy !== null}
               className="flex w-full items-center justify-center gap-3 rounded-lg border border-line bg-white px-4 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:opacity-60">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/logos/${p.id}.svg`} alt="" className="h-5 w-5" onError={(e) => e.currentTarget.remove()} />
+              {p.logo && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={`/logos/${p.id}.svg`} alt="" className="h-5 w-5" />
+              )}
               {busy === p.id ? "…" : `${labels.continueWith} ${p.label}`}
             </button>
           ))}
