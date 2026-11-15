@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         <p className="mt-2 text-muted">{t("login.lead")}</p>
         <div className="mt-8">
           {authEnabled() ? (
-            <LoginButtons next={safeNext} labels={{ continueWith: t("login.continueWith"), failed: t("login.failed") }} />
+            <LoginButtons next={safeNext} labels={{ continueWith: t("login.continueWith"), failed: t("login.failed"), email: t("login.email"), sendLink: t("login.sendLink"), sent: t("login.sent"), or: t("login.or") }} />
           ) : (
             <p className="rounded-lg border border-warn bg-warn-soft p-4 text-sm text-warn">{t("login.disabled")}</p>
           )}

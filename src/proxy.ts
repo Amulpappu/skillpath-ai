@@ -10,6 +10,15 @@ export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
   if (!authEnabled()) return response;
 
+  // A sign-in link can land on any page (Supabase falls back to the Site URL); finish it in the callback.
+  const code = request.nextUrl.searchParams.get("code");
+  if (code && request.nextUrl.pathname !== "/auth/callback") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth/callback";
+    url.search = `?code=${encodeURIComponent(code)}&next=/dashboard`;
+    return NextResponse.redirect(url);
+  }
+
   const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
       getAll: () => request.cookies.getAll(),

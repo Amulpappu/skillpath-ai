@@ -12,8 +12,9 @@ const ALL_PROVIDERS = [
 export type ProviderId = (typeof ALL_PROVIDERS)[number]["id"];
 
 /**
- * Providers switched on with NEXT_PUBLIC_AUTH_PROVIDERS (comma-separated, e.g. "google,github").
- * Defaults to Google and GitHub, which are free to set up; Microsoft needs an Azure account.
+ * OAuth buttons are shown only after the provider is switched on in Supabase AND listed in
+ * NEXT_PUBLIC_OAUTH_PROVIDERS (comma-separated, e.g. "google,github"). Until then, email sign-in
+ * (a one-time link, built into Supabase) is the only option, so no button ever leads to an error.
  */
-const enabled = (process.env.NEXT_PUBLIC_AUTH_PROVIDERS ?? "google,github").split(",").map((s) => s.trim());
+const enabled = (process.env.NEXT_PUBLIC_OAUTH_PROVIDERS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 export const PROVIDERS = ALL_PROVIDERS.filter((p) => enabled.includes(p.id));
