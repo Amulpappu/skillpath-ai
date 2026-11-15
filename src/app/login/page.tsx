@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Link from "next/link";
 import { LoginButtons } from "./LoginButtons";
 import { Logo } from "@/components/Logo";
@@ -11,7 +13,8 @@ export const metadata: Metadata = { title: "Sign in" };
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string }> }) {
   const { t } = await getT();
   const { next, error } = await searchParams;
-  const providers = await enabledProviders();
+  // a logo is shown only if an official mark has been added to public/logos/<provider>.svg
+  const providers = (await enabledProviders()).map((p) => ({ ...p, logo: existsSync(join(process.cwd(), "public", "logos", `${p.id}.svg`)) }));
   const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
   return (
     <main id="main" className="grid min-h-screen place-items-center px-5 py-12">
