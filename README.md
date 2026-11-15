@@ -1,6 +1,37 @@
 # SkillPath AI
 
-An AI-powered learning platform that understands a learner's skills, finds the gaps for a target career, and builds a personalised roadmap that adapts as they progress. Built for **PromptWars × Rathinam Technical Campus** (Google for Developers and Hack2skill).
+A global, AI-powered learning, placement and job platform. Twelve specialist agents read a learner's skills, match them to roles worldwide, build a paced roadmap, test them from a verified question bank, prepare them for their dream company's hiring rounds and find open jobs.
+
+> **v2 is on the `v2` branch.** `main` still holds the PromptWars version (below), which finished in the top 10 of 572 with an AI evaluation score of 95.99/100.
+
+## What v2 adds
+
+| Area | What it does |
+|---|---|
+| 12 agents | Profile Analyst, Career Matcher, Learning Planner, Course Curator, Question Smith, Assessment Agent, Practice Coach, Company Prep, Placement Readiness, Job Scout, Progress Tracker, AI Mentor (`src/lib/agents/registry.ts`) |
+| Accounts | Sign in with Google or GitHub through Supabase Auth; Microsoft optional. Guests can use everything with progress saved in the browser |
+| Database | Supabase Postgres with row-level security on every user table; question answers are readable only by the server (`supabase/migrations`) |
+| Global | 12 interface languages incl. Hindi, Tamil, Telugu, Kannada, Malayalam and right-to-left Arabic; 48 roles; 100 skills incl. 28 programming languages |
+| AI-era catalogue | AI Engineer, AI Agent Engineer, AI Consultant and AI Security Engineer roles; 9 AI skills (RAG, agents & MCP, evaluation, AI security…); one AI skill added to every role. Reviewed November 2026 |
+| Question bank | Question Smith writes questions per syllabus topic with Gemini, a quality gate rejects weak or duplicate ones, and a blind second answer keeps only confirmed keys. Target 465+ per skill; grading happens on the server |
+| Coding practice | 74 LeetCode interview problems in 12 topics, unlocked a few at a time and sized to weekly hours; reorderable topics; HackerRank warm-ups; GeeksforGeeks and CodeChef practice |
+| Company prep | 14 companies with typical rounds, aptitude / English / problem-understanding tests and official careers links |
+| Placement readiness | Score out of 100: core-skill quizzes 40%, practice 30%, aptitude and English 20%, profile 10% |
+| Courses and labs | Learn → Try it in a lab → Practise → Quiz for every skill, with free official courses and hands-on tools (VisuAlgo, Python Tutor, Packet Tracer, Wireshark, OverTheWire, TensorFlow Playground, Wokwi…) |
+| Jobs | Job Scout: live openings from Arbeitnow and Remotive (no keys) plus ready searches on LinkedIn, Indeed, Naukri, foundit and Internshala |
+
+## Set up v2
+
+1. Create a Supabase project and run the files in `supabase/migrations` in order.
+2. Copy `.env.example` to `.env.local` and fill in `GEMINI_API_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` (server only).
+3. `npm install`, then `npm run dev`.
+4. Grow the question bank: `npm run bank:grow` locally, or add `GEMINI_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` as GitHub Actions secrets to run `.github/workflows/grow-question-bank.yml` every hour.
+
+Tests: `npm test` (59 unit and pipeline tests). Every page and API was also checked end-to-end with Playwright.
+
+---
+
+# PromptWars version (v1)
 
 ## Chosen vertical and problem statement (PromptWars × RTC)
 

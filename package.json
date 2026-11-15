@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint src tests",
     "test": "vitest run",
-    "bank:grow": "tsx --conditions=react-server --env-file=.env.local scripts/grow-bank.ts"
+    "bank:grow": "tsx --conditions=react-server --env-file=.env.local scripts/grow-bank.ts",
+    "bank:grow:ci": "tsx --conditions=react-server scripts/grow-bank.ts"
   },
   "dependencies": {
     "@google/genai": "^3.3.0",
