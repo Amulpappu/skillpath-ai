@@ -18,7 +18,11 @@ export async function GET(request: NextRequest) {
   }
   const { data } = await supabase.auth.getUser();
   if (data.user) return NextResponse.redirect(new URL(next, url.origin));
-  const reason = url.searchParams.get("error_description") ?? (code ? "expired" : "missing");
+  if (code) {
+    // The browser holds the PKCE code verifier; let it finish the sign-in.
+    return NextResponse.redirect(new URL(`/auth/finish?code=${encodeURIComponent(code)}&next=${encodeURIComponent(next)}`, url.origin));
+  }
+  const reason = url.searchParams.get("error_description") ?? "missing";
   return NextResponse.redirect(new URL(`/login?error=signin&reason=${encodeURIComponent(reason.slice(0, 120))}`, url.origin));
 }
 

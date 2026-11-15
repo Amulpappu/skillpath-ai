@@ -10,9 +10,9 @@ import { enabledProviders } from "@/lib/supabase/providers";
 
 export const metadata: Metadata = { title: "Sign in" };
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string }> }) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string; reason?: string }> }) {
   const { t } = await getT();
-  const { next, error } = await searchParams;
+  const { next, error, reason } = await searchParams;
   // a logo is shown only if an official mark has been added to public/logos/<provider>.svg
   const providers = (await enabledProviders()).map((p) => ({ ...p, logo: existsSync(join(process.cwd(), "public", "logos", `${p.id}.svg`)) }));
   const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
@@ -28,10 +28,9 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           ) : (
             <p className="rounded-lg border border-warn bg-warn-soft p-4 text-sm text-warn">{t("login.disabled")}</p>
           )}
-          {error && <p role="alert" className="mt-4 text-sm text-bad">{t("login.failed")}</p>}
+          {error && <p role="alert" className="mt-4 text-sm text-bad">{t("login.failed")}{reason ? ` (${reason.slice(0, 120)})` : ""}</p>}
         </div>
         <p className="mt-8 text-xs leading-relaxed text-muted">{t("login.terms")}</p>
-        <Link href="/plan" className="mt-6 inline-block text-sm font-medium text-accent underline underline-offset-2">{t("landing.guest")}</Link>
       </div>
     </main>
   );
