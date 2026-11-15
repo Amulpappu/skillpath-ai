@@ -8,7 +8,7 @@ import { currentUser, supabaseServer } from "@/lib/supabase/server";
 
 const handle = z.string().trim().max(40).regex(/^[A-Za-z0-9_.-]*$/, "Handles use letters, numbers, dot, dash or underscore").optional().default("");
 
-export const profileSettingsSchema = z.object({
+const profileSettingsSchema = z.object({
   full_name: z.string().trim().max(80).default(""),
   country: z.string().refine((c) => c === "" || COUNTRIES.some((x) => x.code === c)).default("IN"),
   target_role: z.string().refine((r) => r === "" || ROLES.includes(r)).default(""),
