@@ -20,17 +20,17 @@ export default async function Dashboard() {
       <h1 className="text-2xl font-semibold tracking-tight">{first ? `Welcome, ${first}` : t("nav.dashboard")}</h1>
       <p className="mt-1 text-muted">{profile?.target_role ? `Working towards ${profile.target_role}` : "Set your skills and target role to start your plan."}</p>
 
-      <section className="mt-8 rounded-xl border border-line bg-card p-6">
+      <section className="mt-8 rounded-md border border-line bg-card p-6">
         <h2 className="font-semibold">Next step</h2>
         <p className="mt-1 text-sm text-muted">Enter your current skills and dream role. The agents build your roadmap in under a minute.</p>
-        <Link href="/plan" className="mt-4 inline-block rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-ink">Build my plan</Link>
+        <Link href="/plan" className="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover">Build my plan</Link>
       </section>
 
       <section aria-labelledby="team" className="mt-8">
         <h2 id="team" className="font-semibold">Your agent team</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {AGENTS.map((a) => (
-            <li key={a.id} className="rounded-lg border border-line bg-card p-4">
+            <li key={a.id} className="rounded-md border border-line bg-card p-4">
               <p className="flex items-center justify-between text-sm font-semibold">
                 {a.name}
                 <span className="font-mono text-[11px] font-normal uppercase tracking-wider text-muted">{a.stage}</span>

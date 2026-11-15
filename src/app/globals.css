@@ -1,28 +1,97 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-paper: #f4f1ea;
-  --color-card: #fffdf8;
-  --color-ink: #17212b;
-  --color-muted: #51606e;
-  --color-line: #d9d3c5;
-  --color-accent: #0b5f58;
-  --color-accent-soft: #dcefe9;
-  --color-warn: #8a4b00;
-  --color-warn-soft: #fbecd0;
-  --color-bad: #9b1c1c;
-  --color-bad-soft: #fbe4e1;
-  --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-subtle: var(--subtle);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-link: var(--link);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-inverse: var(--inverse);
+  --color-on-inverse: var(--on-inverse);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
+
+/* GitHub (Primer) inspired palette. Light and dark follow the device unless the learner picks one. */
+:root {
+  color-scheme: light;
+  --paper: #ffffff;
+  --card: #ffffff;
+  --subtle: #f6f8fa;
+  --ink: #1f2328;
+  --muted: #59636e;
+  --line: #d1d9e0;
+  --accent: #1f883d;
+  --accent-hover: #1c8139;
+  --accent-soft: #dafbe1;
+  --link: #0969da;
+  --warn: #9a6700;
+  --warn-soft: #fff8c5;
+  --bad: #d1242f;
+  --bad-soft: #ffebe9;
+  --inverse: #25292e;
+  --on-inverse: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0d1117;
+    --card: #151b23;
+    --subtle: #212830;
+    --ink: #f0f6fc;
+    --muted: #9198a1;
+    --line: #3d444d;
+    --accent: #238636;
+    --accent-hover: #29903b;
+    --accent-soft: #12261e;
+    --link: #4493f8;
+    --warn: #d29922;
+    --warn-soft: #272115;
+    --bad: #f85149;
+    --bad-soft: #25171c;
+    --inverse: #f0f6fc;
+    --on-inverse: #0d1117;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0d1117;
+  --card: #151b23;
+  --subtle: #212830;
+  --ink: #f0f6fc;
+  --muted: #9198a1;
+  --line: #3d444d;
+  --accent: #238636;
+  --accent-hover: #29903b;
+  --accent-soft: #12261e;
+  --link: #4493f8;
+  --warn: #d29922;
+  --warn-soft: #272115;
+  --bad: #f85149;
+  --bad-soft: #25171c;
+  --inverse: #f0f6fc;
+  --on-inverse: #0d1117;
+}
+
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 2px solid var(--color-link);
   outline-offset: 2px;
 }
 

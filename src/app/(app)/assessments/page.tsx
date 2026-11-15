@@ -29,7 +29,7 @@ export default async function AssessmentsPage() {
       <h1 className="text-2xl font-semibold tracking-tight">Assessments</h1>
       <p className="mt-1 text-muted">Ten fresh questions each time, from a bank checked twice by the Question Smith. Answers are graded on the server.</p>
 
-      <section aria-label="Question bank" className="mt-6 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+      <section aria-label="Question bank" className="mt-6 grid gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-3">
         <div className="bg-card p-4"><p className="text-sm text-muted">Verified questions</p><p className="text-2xl font-semibold tabular-nums">{bankTotal.toLocaleString()}</p></div>
         <div className="bg-card p-4"><p className="text-sm text-muted">Skills at {BANK_TARGET}+</p><p className="text-2xl font-semibold tabular-nums">{ready} / {ALL_SKILLS.length}</p></div>
         <div className="bg-card p-4">

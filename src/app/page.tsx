@@ -30,9 +30,9 @@ export default async function Landing() {
           <h1 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-6xl">{t("landing.title")}</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{t("landing.lead")}</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link href="/login" className="rounded-lg bg-accent px-6 py-3 font-medium text-white hover:bg-ink">{t("landing.cta")}</Link>
+            <Link href="/login" className="rounded-md bg-accent px-6 py-3 font-medium text-white hover:bg-accent-hover">{t("landing.cta")}</Link>
           </div>
-          <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
+          <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="bg-card px-6 py-5">
                 <dt className="text-sm text-muted">{s.label}</dt>

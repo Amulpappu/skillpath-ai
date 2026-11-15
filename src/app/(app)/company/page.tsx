@@ -17,11 +17,11 @@ export default async function CompanyPage({ searchParams }: { searchParams: Prom
       <nav aria-label="Companies" className="mt-6 flex flex-wrap gap-2">
         {COMPANIES.map((x) => (
           <Link key={x.name} href={`/company?c=${encodeURIComponent(x.name)}`} aria-current={x.name === company.name ? "page" : undefined}
-            className={`rounded-full border px-3 py-1.5 text-sm ${x.name === company.name ? "border-ink bg-ink text-white" : "border-line bg-card hover:border-ink"}`}>{x.name}</Link>
+            className={`rounded-full border px-3 py-1.5 text-sm ${x.name === company.name ? "border-inverse bg-inverse text-on-inverse" : "border-line bg-card hover:border-ink"}`}>{x.name}</Link>
         ))}
       </nav>
 
-      <section className="mt-6 grid gap-6 rounded-xl border border-line bg-card p-6 md:grid-cols-2">
+      <section className="mt-6 grid gap-6 rounded-md border border-line bg-card p-6 md:grid-cols-2">
         <div>
           <p className="font-mono text-xs uppercase tracking-wider text-muted">{company.kind}</p>
           <h2 className="mt-1 text-xl font-semibold">{company.name}: typical rounds</h2>
@@ -29,12 +29,12 @@ export default async function CompanyPage({ searchParams }: { searchParams: Prom
             {company.rounds.map((r, i) => <li key={r} className="flex gap-3"><span className="font-mono text-xs text-muted">{i + 1}</span>{r}</li>)}
           </ol>
           <p className="mt-4 text-xs leading-relaxed text-muted">Patterns change each hiring season. Always check the current pattern on the{" "}
-            <a href={company.careers} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">official {company.name} careers page</a>.</p>
+            <a href={company.careers} target="_blank" rel="noopener noreferrer" className="text-link hover:underline">official {company.name} careers page</a>.</p>
         </div>
         <div>
           <h3 className="font-semibold">What to practise</h3>
           <ul className="mt-3 space-y-2 text-sm">{sections.map((s) => <li key={s.skill} className="border-l-2 border-accent pl-3">{s.label}</li>)}</ul>
-          <Link href="/practice" className="mt-4 inline-block text-sm font-medium text-accent underline underline-offset-2">Coding problems in order →</Link>
+          <Link href="/practice" className="mt-4 inline-block text-sm font-medium text-link hover:underline">Coding problems in order →</Link>
         </div>
       </section>
 

@@ -55,7 +55,7 @@ export function PracticeLadder() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="space-y-6">
-        <section aria-labelledby="today" className="rounded-xl border border-line bg-card p-5">
+        <section aria-labelledby="today" className="rounded-md border border-line bg-card p-5">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="today" className="font-semibold">Today: {target} problem{target > 1 ? "s" : ""}</h2>
             <p className="text-sm text-muted">{solved} / {total} solved{synced === false ? " · saved in this browser" : synced ? " · synced to your account" : ""}</p>
@@ -63,16 +63,16 @@ export function PracticeLadder() {
           <p className="mt-1 text-sm text-muted">The Practice Coach unlocks problems one step at a time, easiest first. Solve on the platform, then mark it here.</p>
           <ol className="mt-4 space-y-3">
             {today.map((p, i) => (
-              <li key={p.id} className="rounded-lg border border-line bg-white p-4">
+              <li key={p.id} className="rounded-md border border-line bg-card p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="font-medium"><span className="mr-2 font-mono text-xs text-muted">{i + 1}</span>{p.title}</p>
                   <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${DIFF_STYLE[p.difficulty]}`}>{p.difficulty}</span>
                 </div>
                 <p className="mt-1 text-sm text-muted">{p.topic} · {p.platform} · about {p.minutes} min</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-ink">Solve on {p.platform}<span className="sr-only"> (opens in a new tab)</span></a>
-                  <button type="button" onClick={() => mark(p.id, "solved")} className="rounded-lg border border-line px-3 py-1.5 text-sm hover:border-ink">Mark solved</button>
-                  <button type="button" onClick={() => mark(p.id, "skipped")} className="rounded-lg px-3 py-1.5 text-sm text-muted hover:text-ink">Skip</button>
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-accent-hover">Solve on {p.platform}<span className="sr-only"> (opens in a new tab)</span></a>
+                  <button type="button" onClick={() => mark(p.id, "solved")} className="rounded-md border border-line px-3 py-1.5 text-sm hover:border-ink">Mark solved</button>
+                  <button type="button" onClick={() => mark(p.id, "skipped")} className="rounded-md px-3 py-1.5 text-sm text-muted hover:text-ink">Skip</button>
                 </div>
               </li>
             ))}
@@ -80,11 +80,11 @@ export function PracticeLadder() {
           </ol>
           <label className="mt-4 flex items-center gap-2 text-sm text-muted">Hours per week
             <input type="number" min={1} max={80} value={weeklyHours} onChange={(e) => { const v = Math.max(1, Math.min(80, Number(e.target.value) || 1)); setWeeklyHours(v); persist({ weeklyHours: v }); }}
-              className="w-20 rounded-md border border-line bg-white px-2 py-1 text-ink" />
+              className="w-20 rounded-md border border-line bg-card px-2 py-1 text-ink" />
           </label>
         </section>
 
-        <section aria-labelledby="topics" className="rounded-xl border border-line bg-card p-5">
+        <section aria-labelledby="topics" className="rounded-md border border-line bg-card p-5">
           <h2 id="topics" className="font-semibold">Your topic order</h2>
           <p className="mt-1 text-sm text-muted">Move topics up to practise them sooner. Problems inside a topic stay easiest first.</p>
           <ol className="mt-4 divide-y divide-line">
@@ -108,18 +108,18 @@ export function PracticeLadder() {
       </div>
 
       <aside className="space-y-6">
-        <section aria-labelledby="warm" className="rounded-xl border border-line bg-card p-5">
+        <section aria-labelledby="warm" className="rounded-md border border-line bg-card p-5">
           <h2 id="warm" className="font-semibold">Language warm-up</h2>
-          <select value={language} onChange={(e) => setLanguage(e.target.value)} aria-label="Language" className="mt-3 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm">
+          <select value={language} onChange={(e) => setLanguage(e.target.value)} aria-label="Language" className="mt-3 w-full rounded-md border border-line bg-card px-3 py-2 text-sm">
             {Object.keys(WARMUPS).map((l) => <option key={l}>{l}</option>)}
           </select>
-          <a href={WARMUPS[language].url} target="_blank" rel="noopener noreferrer" className="mt-3 block text-sm font-medium text-accent underline underline-offset-2">HackerRank {WARMUPS[language].title}</a>
+          <a href={WARMUPS[language].url} target="_blank" rel="noopener noreferrer" className="mt-3 block text-sm font-medium text-link hover:underline">HackerRank {WARMUPS[language].title}</a>
         </section>
-        <section aria-labelledby="open" className="rounded-xl border border-line bg-card p-5">
+        <section aria-labelledby="open" className="rounded-md border border-line bg-card p-5">
           <h2 id="open" className="font-semibold">Open practice</h2>
           <ul className="mt-3 space-y-3 text-sm">
             {OPEN_PRACTICE.map((o) => (
-              <li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">{o.platform}</a><span className="block text-muted">{o.title}</span></li>
+              <li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="font-medium text-link hover:underline">{o.platform}</a><span className="block text-muted">{o.title}</span></li>
             ))}
           </ul>
         </section>

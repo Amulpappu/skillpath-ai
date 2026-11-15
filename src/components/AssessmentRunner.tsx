@@ -51,9 +51,9 @@ export function AssessmentRunner({ skills, groups, category = "skill", startLabe
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-end gap-3 rounded-xl border border-line bg-card p-5">
+      <div className="flex flex-wrap items-end gap-3 rounded-md border border-line bg-card p-5">
         <label className="text-sm font-medium">Skill
-          <select value={skill} onChange={(e) => { setSkill(e.target.value); setQuestions(null); setResult(null); }} className="mt-1 block w-64 rounded-lg border border-line bg-white px-3 py-2">
+          <select value={skill} onChange={(e) => { setSkill(e.target.value); setQuestions(null); setResult(null); }} className="mt-1 block w-64 rounded-md border border-line bg-card px-3 py-2">
             {groups.map((g) => (
               <optgroup key={g.label} label={g.label}>{g.skills.map((s) => <option key={s}>{s}</option>)}</optgroup>
             ))}
@@ -61,22 +61,22 @@ export function AssessmentRunner({ skills, groups, category = "skill", startLabe
         </label>
         <fieldset className="text-sm font-medium">
           <legend>Level</legend>
-          <div className="mt-1 flex overflow-hidden rounded-lg border border-line">
+          <div className="mt-1 flex overflow-hidden rounded-md border border-line">
             {LEVELS.map((l) => (
               <button key={l} type="button" onClick={() => { setLevel(l); setQuestions(null); setResult(null); }} aria-pressed={level === l}
-                className={`px-3 py-2 capitalize ${level === l ? "bg-ink text-white" : "bg-white hover:bg-paper"}`}>{l}</button>
+                className={`px-3 py-2 capitalize ${level === l ? "bg-inverse text-on-inverse" : "bg-card hover:bg-subtle"}`}>{l}</button>
             ))}
           </div>
         </fieldset>
-        <button type="button" onClick={start} disabled={busy} className="rounded-lg bg-accent px-5 py-2 text-sm font-medium text-white hover:bg-ink disabled:opacity-60">
+        <button type="button" onClick={start} disabled={busy} className="rounded-md bg-accent px-5 py-2 text-sm font-medium text-white hover:bg-accent-hover disabled:opacity-60">
           {questions ? "New test" : startLabel}
         </button>
       </div>
 
-      {error && <p role="alert" className="rounded-lg border border-bad bg-bad-soft p-4 text-sm text-bad">{error}</p>}
+      {error && <p role="alert" className="rounded-md border border-bad bg-bad-soft p-4 text-sm text-bad">{error}</p>}
 
       {result && (
-        <div className={`rounded-xl border p-5 ${result.passed ? "border-accent bg-accent-soft" : "border-warn bg-warn-soft"}`} aria-live="polite">
+        <div className={`rounded-md border p-5 ${result.passed ? "border-accent bg-accent-soft" : "border-warn bg-warn-soft"}`} aria-live="polite">
           <p className="text-3xl font-semibold tabular-nums">{result.score}%</p>
           <p className="mt-1 text-sm">{result.right} of {result.total} correct · pass mark 60% · {result.passed ? "Passed. Your roadmap moves on." : "Below 60%. The Learning Planner will add a revision step."}</p>
         </div>
@@ -87,7 +87,7 @@ export function AssessmentRunner({ skills, groups, category = "skill", startLabe
           {questions.map((q, qi) => {
             const r = reviewFor(q.id);
             return (
-              <li key={q.id} className="rounded-xl border border-line bg-card p-5">
+              <li key={q.id} className="rounded-md border border-line bg-card p-5">
                 <p className="text-xs font-medium uppercase tracking-wide text-muted">Question {qi + 1}{q.topic ? ` · ${q.topic}` : ""}</p>
                 <p className="mt-1 font-medium leading-snug"><RichText text={q.prompt} /></p>
                 <div className="mt-3 grid gap-2" role="radiogroup" aria-label={`Question ${qi + 1}`}>
@@ -97,7 +97,7 @@ export function AssessmentRunner({ skills, groups, category = "skill", startLabe
                     return (
                       <button key={oi} type="button" role="radio" aria-checked={chosen} disabled={Boolean(result)}
                         onClick={() => setAnswers((a) => a.map((v, i) => (i === qi ? oi : v)))}
-                        className={`flex items-start gap-3 rounded-lg border bg-white px-3 py-2 text-left text-sm ${state}`}>
+                        className={`flex items-start gap-3 rounded-md border bg-card px-3 py-2 text-left text-sm ${state}`}>
                         <span className="font-mono text-xs text-muted">{LETTERS[oi]}</span><RichText text={o} className="min-w-0" />
                       </button>
                     );
@@ -111,7 +111,7 @@ export function AssessmentRunner({ skills, groups, category = "skill", startLabe
       )}
 
       {questions && !result && (
-        <button type="button" onClick={submit} disabled={busy || unanswered > 0} className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-ink disabled:opacity-50">
+        <button type="button" onClick={submit} disabled={busy || unanswered > 0} className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent-hover disabled:opacity-50">
           {unanswered > 0 ? `Answer ${unanswered} more` : "Submit answers"}
         </button>
       )}

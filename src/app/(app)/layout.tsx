@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Logo } from "@/components/Logo";
 import { getT } from "@/lib/i18n/server";
 import type { MessageKey } from "@/lib/i18n/messages";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser, supabaseServer } from "@/lib/supabase/server";
+import { getTheme } from "@/lib/theme";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 /** Sections of the signed-in app. Only built sections are listed; the rest arrive in later phases. */
 const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
@@ -22,7 +25,16 @@ const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const { t, locale } = await getT();
   const user = await currentUser();
-  const name = (user?.user_metadata?.full_name as string | undefined) ?? user?.email ?? "Guest";
+  const theme = await getTheme();
+  let xp: number | null = null;
+  let name = (user?.user_metadata?.full_name as string | undefined) ?? user?.email ?? "Guest";
+  if (user) {
+    const { data: profile } = await (await supabaseServer()).from("profiles").select("full_name, xp, onboarded_at").eq("id", user.id).single();
+    // New accounts finish the short setup (basic info + tour) before they start learning.
+    if (profile && !profile.onboarded_at) redirect("/welcome");
+    xp = profile?.xp ?? 0;
+    name = profile?.full_name || name;
+  }
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[240px_1fr]">
       <aside className="border-b border-line bg-card lg:min-h-screen lg:border-b-0 lg:border-e">
@@ -31,15 +43,17 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           <ul className="flex gap-1 overflow-x-auto lg:block lg:space-y-0.5">
             {NAV.filter((n) => n.ready).map((n) => (
               <li key={n.href}>
-                <Link href={n.href} className="block whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-ink hover:bg-paper">{t(n.key)}</Link>
+                <Link href={n.href} className="block whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-ink hover:bg-subtle">{t(n.key)}</Link>
               </li>
             ))}
           </ul>
         </nav>
       </aside>
       <div>
-        <header className="flex items-center justify-end gap-4 border-b border-line bg-paper px-6 py-3">
+        <header className="flex items-center justify-end gap-3 border-b border-line bg-card px-6 py-2.5">
           <LanguageSwitcher current={locale} label={t("nav.language")} />
+          <ThemeToggle initial={theme} />
+          {xp !== null && <span title="Your XP is private" className="rounded-full border border-line bg-subtle px-2.5 py-0.5 font-mono text-xs text-accent">★ {xp} XP</span>}
           <span className="text-sm text-muted">{name}</span>
           {user && (
             <form action="/auth/signout" method="post">
