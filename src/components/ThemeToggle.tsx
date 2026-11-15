@@ -32,14 +32,14 @@ export function ThemeToggle({ initial }: { initial: ThemeChoice }) {
 }
 
 /** Settings control: three explicit choices. */
-export function ThemePicker({ initial }: { initial: ThemeChoice }) {
+export function ThemePicker({ initial, compact = false }: { initial: ThemeChoice; compact?: boolean }) {
   const [choice, setChoice] = useState<ThemeChoice>(initial);
   return (
     <div role="radiogroup" aria-label="Theme" className="grid gap-3 sm:grid-cols-3">
       {ORDER.map((c) => (
         <button key={c} type="button" role="radio" aria-checked={choice === c} onClick={() => { applyTheme(c); setChoice(c); }}
-          className={`flex items-center gap-2 rounded-md border px-3 py-2.5 text-sm ${choice === c ? "border-link bg-subtle font-semibold" : "border-line bg-card hover:bg-subtle"}`}>
-          <Icon choice={c} /> {LABEL[c]}
+          className={`flex items-center justify-center gap-2 rounded-md border px-3 py-2.5 text-sm ${choice === c ? "border-link bg-subtle font-semibold" : "border-line bg-card hover:bg-subtle"}`}>
+          <Icon choice={c} /> {compact ? { system: "Device", light: "Light", dark: "Dark" }[c] : LABEL[c]}
         </button>
       ))}
     </div>

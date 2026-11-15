@@ -95,9 +95,39 @@ body {
   outline-offset: 2px;
 }
 
+/* ---- Motion: small, quick feedback (turned off for people who prefer reduced motion) ---- */
+@keyframes page-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
+.page-enter { animation: page-enter .28s cubic-bezier(.2,.8,.2,1) both; }
+.menu-pop { animation: pop-in .16s ease-out both; transform-origin: bottom left; }
+
+/* Buttons and button-like links respond to hover and press */
+button, a.rounded-md, a.rounded-full, .account-card, select, input, textarea {
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease, transform .12s ease;
+}
+button:not(:disabled):active, a.rounded-md:active, a.rounded-full:active { transform: scale(.97); }
+button.bg-accent:not(:disabled):hover, a.bg-accent:hover { box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--accent) 60%, transparent); }
+input:focus, select:focus, textarea:focus { border-color: var(--link); box-shadow: 0 0 0 3px color-mix(in srgb, var(--link) 25%, transparent); outline: none; }
+
+/* Sidebar items: text and icon move slightly on hover, press shrinks */
+.nav-item { transition: background-color .15s ease, color .15s ease; }
+.nav-item .nav-icon { transition: transform .15s ease; }
+.nav-item:hover .nav-icon { transform: translateX(2px); }
+a:active > .nav-item { transform: scale(.98); }
+
+/* Boxes lift a little when they contain something to click */
+section.rounded-md:has(a, button), li.rounded-md:has(a, button) { transition: border-color .2s ease, box-shadow .2s ease; }
+section.rounded-md:has(a, button):hover, li.rounded-md:has(a, button):hover { border-color: color-mix(in srgb, var(--muted) 55%, var(--line)); box-shadow: 0 4px 14px -8px rgb(0 0 0 / .35); }
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* The GitHub mark is black; show it white on dark backgrounds. */
+:root[data-theme="dark"] img[src$="/logos/github.svg"] { filter: invert(1); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img[src$="/logos/github.svg"] { filter: invert(1); }
 }
