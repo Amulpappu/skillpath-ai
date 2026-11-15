@@ -1,13 +1,14 @@
 {
   "name": "skillpath-ai",
-  "version": "0.1.0",
+  "version": "2.0.0-alpha",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src tests",
-    "test": "vitest run"
+    "test": "vitest run",
+    "bank:grow": "tsx --conditions=react-server --env-file=.env.local scripts/grow-bank.ts"
   },
   "dependencies": {
     "@google/genai": "^3.3.0",
@@ -27,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^5.1.0"
   }

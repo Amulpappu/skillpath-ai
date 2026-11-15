@@ -11,7 +11,7 @@ const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
   { href: "/dashboard", key: "nav.dashboard", ready: true },
   { href: "/plan", key: "nav.roadmap", ready: true },
   { href: "/practice", key: "nav.practice", ready: false },
-  { href: "/assessments", key: "nav.assessments", ready: false },
+  { href: "/assessments", key: "nav.assessments", ready: true },
   { href: "/company", key: "nav.company", ready: false },
   { href: "/jobs", key: "nav.jobs", ready: false },
   { href: "/courses", key: "nav.courses", ready: false },
