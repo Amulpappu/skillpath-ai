@@ -42,9 +42,16 @@ async function next(): Promise<[string, Level, number] | null> {
   return best;
 }
 
+async function main() {
 let calls = 0, added = 0, failures = 0;
 while (calls < maxCalls) {
-  const pick = await next();
+  let pick: Awaited<ReturnType<typeof next>>;
+  try { pick = await next(); } catch (e) {
+    failures++;
+    console.warn(`! Could not reach the database: ${(e as Error).message}. Retrying in 30s.`);
+    if (failures >= 8) { console.error("Stopping after 8 failures in a row. Check your internet and .env.local."); break; }
+    await sleep(30_000); continue;
+  }
   if (!pick) { console.log("✓ Target reached for every selected skill."); break; }
   const [skill, level, have] = pick;
   try {
@@ -63,3 +70,6 @@ while (calls < maxCalls) {
   }
 }
 console.log(`Done: ${calls} batches, ${added} new verified questions.`);
+}
+
+main().catch((e) => { console.error(e); process.exit(1); });
