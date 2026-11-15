@@ -21,17 +21,22 @@ function getClient(): GoogleGenAI {
  * Throws when the key is missing, the call times out, or the output does not match the schema,
  * so each agent can fall back to its rule engine.
  */
-export async function askGemini<T>(system: string, prompt: string, schema: z.ZodType<T>): Promise<T> {
+export async function askGemini<T>(
+  system: string,
+  prompt: string,
+  schema: z.ZodType<T>,
+  opts: { timeoutMs?: number; temperature?: number; model?: string } = {},
+): Promise<T> {
   if (!geminiAvailable()) throw new Error("GEMINI_API_KEY is not set");
 
   const response = await getClient().models.generateContent({
-    model: MODEL,
+    model: opts.model ?? MODEL,
     contents: prompt,
     config: {
       systemInstruction: system,
       responseMimeType: "application/json",
-      temperature: 0.4,
-      abortSignal: AbortSignal.timeout(TIMEOUT_MS),
+      temperature: opts.temperature ?? 0.4,
+      abortSignal: AbortSignal.timeout(opts.timeoutMs ?? TIMEOUT_MS),
     },
   });
 

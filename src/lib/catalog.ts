@@ -1,7 +1,9 @@
 import type { Resource } from "./types";
+import { GLOBAL_ROLES, GLOBAL_SKILLS, aiSkillFor } from "./catalogGlobal";
 
 /** Skills each supported role needs. "core" skills weigh double in the match score. */
-export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[] }> = {
+/** The original 13 roles; their core skills have the offline question bank. */
+export const BASE_ROLES: Record<string, { core: string[]; useful: string[] }> = {
   "Full Stack Developer": {
     core: ["HTML", "CSS", "JavaScript", "React", "Node.js", "SQL"],
     useful: ["Git", "REST APIs", "TypeScript", "Testing"],
@@ -56,6 +58,15 @@ export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[
   },
 };
 
+/** v1 roles plus the v2 global roles. */
+export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[] }> = Object.fromEntries(
+  Object.entries({ ...BASE_ROLES, ...GLOBAL_ROLES }).map(([role, req]) => {
+    const ai = aiSkillFor(role, req.core);
+    const has = req.core.includes(ai) || req.useful.includes(ai);
+    return [role, { core: req.core, useful: has ? req.useful : [...req.useful, ai] }];
+  }),
+);
+
 export const ROLES = Object.keys(ROLE_REQUIREMENTS);
 
 /** Fallback requirements used by the rule engine for roles outside the catalog. */
@@ -67,7 +78,7 @@ export const GENERIC_REQUIREMENTS = {
 type Entry = { resources: Omit<Resource, "type">[]; exercise: string };
 
 /** Curated free learning resources. URLs are fixed here so the model can never invent a link. */
-const SKILL_CATALOG: Record<string, Entry> = {
+const BASE_SKILLS: Record<string, Entry> = {
   HTML: {
     resources: [
       { title: "HTML reference and guides", provider: "MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
@@ -273,6 +284,8 @@ const SKILL_CATALOG: Record<string, Entry> = {
     exercise: "Write end-to-end Playwright tests covering sign-in, form validation and navigation for a web app.",
   },
 };
+
+const SKILL_CATALOG: Record<string, Entry> = { ...BASE_SKILLS, ...GLOBAL_SKILLS };
 
 export const ALL_SKILLS = Object.keys(SKILL_CATALOG).sort();
 
