@@ -152,3 +152,6 @@ create policy "own rows" on public.saved_jobs        for all using ((select auth
 create policy "read own activity" on public.agent_runs for select using ((select auth.uid()) = user_id);
 
 -- questions: no policy on purpose. Only the server (service role) reads them, so answer keys never reach the browser.
+
+-- the sign-up trigger runs as the table owner; nobody should call it through the API
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
