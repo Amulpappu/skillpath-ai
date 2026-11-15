@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { RichText } from "./RichText";
 
 type Level = "beginner" | "intermediate" | "advanced";
 interface Q { id: string; prompt: string; options: string[]; topic?: string | null }
@@ -11,7 +12,9 @@ const LEVELS: Level[] = ["beginner", "intermediate", "advanced"];
 const LETTERS = ["A", "B", "C", "D"];
 
 /** Bank-backed quiz: fetches questions without answers, grades on the server, then shows a review. */
-export function AssessmentRunner({ skills, groups }: { skills: string[]; groups: { label: string; skills: string[] }[] }) {
+export function AssessmentRunner({ skills, groups, category = "skill", startLabel = "Start quiz" }: {
+  skills: string[]; groups: { label: string; skills: string[] }[]; category?: string; startLabel?: string;
+}) {
   const [skill, setSkill] = useState(skills.includes("JavaScript") ? "JavaScript" : skills[0]);
   const [level, setLevel] = useState<Level>("beginner");
   const [questions, setQuestions] = useState<Q[] | null>(null);
@@ -24,7 +27,7 @@ export function AssessmentRunner({ skills, groups }: { skills: string[]; groups:
 
   async function start() {
     setBusy(true); setError(null); setResult(null);
-    const res = await fetch(`/api/bank/quiz?${new URLSearchParams({ skill, level, n: "10" })}`, { cache: "no-store" });
+    const res = await fetch(`/api/bank/quiz?${new URLSearchParams({ skill, level, category, n: "10" })}`, { cache: "no-store" });
     const body = await res.json().catch(() => ({}));
     setBusy(false);
     if (!res.ok) { setError(body.error ?? "Could not load the quiz."); return; }
@@ -36,7 +39,7 @@ export function AssessmentRunner({ skills, groups }: { skills: string[]; groups:
     setBusy(true); setError(null);
     const res = await fetch("/api/bank/grade", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ skill, level, ids: questions.map((q) => q.id), answers, seconds: Math.round((Date.now() - started) / 1000) }),
+      body: JSON.stringify({ skill, level, category, ids: questions.map((q) => q.id), answers, seconds: Math.round((Date.now() - started) / 1000) }),
     });
     const body = await res.json().catch(() => ({}));
     setBusy(false);
@@ -66,7 +69,7 @@ export function AssessmentRunner({ skills, groups }: { skills: string[]; groups:
           </div>
         </fieldset>
         <button type="button" onClick={start} disabled={busy} className="rounded-lg bg-accent px-5 py-2 text-sm font-medium text-white hover:bg-ink disabled:opacity-60">
-          {questions ? "New quiz" : "Start quiz"}
+          {questions ? "New test" : startLabel}
         </button>
       </div>
 
@@ -86,7 +89,7 @@ export function AssessmentRunner({ skills, groups }: { skills: string[]; groups:
             return (
               <li key={q.id} className="rounded-xl border border-line bg-card p-5">
                 <p className="text-xs font-medium uppercase tracking-wide text-muted">Question {qi + 1}{q.topic ? ` · ${q.topic}` : ""}</p>
-                <p className="mt-1 font-medium leading-snug">{q.prompt}</p>
+                <p className="mt-1 font-medium leading-snug"><RichText text={q.prompt} /></p>
                 <div className="mt-3 grid gap-2" role="radiogroup" aria-label={`Question ${qi + 1}`}>
                   {q.options.map((o, oi) => {
                     const chosen = answers[qi] === oi;
@@ -95,12 +98,12 @@ export function AssessmentRunner({ skills, groups }: { skills: string[]; groups:
                       <button key={oi} type="button" role="radio" aria-checked={chosen} disabled={Boolean(result)}
                         onClick={() => setAnswers((a) => a.map((v, i) => (i === qi ? oi : v)))}
                         className={`flex items-start gap-3 rounded-lg border bg-white px-3 py-2 text-left text-sm ${state}`}>
-                        <span className="font-mono text-xs text-muted">{LETTERS[oi]}</span><span>{o}</span>
+                        <span className="font-mono text-xs text-muted">{LETTERS[oi]}</span><RichText text={o} className="min-w-0" />
                       </button>
                     );
                   })}
                 </div>
-                {r && <p className="mt-3 text-sm text-muted">{r.explanation}</p>}
+                {r && <p className="mt-3 text-sm text-muted"><RichText text={r.explanation} /></p>}
               </li>
             );
           })}

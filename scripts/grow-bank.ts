@@ -11,6 +11,7 @@
  */
 import { createClient } from "@supabase/supabase-js";
 import { ALL_SKILLS } from "../src/lib/catalog";
+import { PLACEMENT_SKILLS } from "../src/lib/company/catalog";
 import { LEVEL_TARGET } from "../src/lib/bank/quality";
 import { growOnce, type Category, type Level } from "../src/lib/bank/smith";
 import { bankCounts } from "../src/lib/bank/store";
@@ -18,7 +19,7 @@ import { bankCounts } from "../src/lib/bank/store";
 const args = process.argv.slice(2);
 const arg = (name: string) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
 const onlySkill = arg("skill");
-const category = (arg("category") ?? "skill") as Category;
+const onlyCategory = arg("category") as Category | undefined;
 const maxCalls = Number(arg("max-calls") ?? 1000);
 const delayMs = Number(arg("delay") ?? 4) * 1000;
 const LEVELS: Level[] = ["beginner", "intermediate", "advanced"];
@@ -31,13 +32,19 @@ if (!url || !key || !process.env.GEMINI_API_KEY) {
 const db = createClient(url, key, { auth: { persistSession: false } });
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function next(): Promise<[string, Level, number] | null> {
+/** Every bank to grow: all technical skills plus the placement sections (aptitude, English, problem understanding). */
+const TARGETS: { skill: string; category: Category }[] = [
+  ...ALL_SKILLS.map((skill) => ({ skill, category: "skill" as Category })),
+  ...PLACEMENT_SKILLS.map((p) => ({ skill: p.skill, category: p.category as Category })),
+].filter((t) => (!onlySkill || t.skill === onlySkill) && (!onlyCategory || t.category === onlyCategory));
+
+async function next(): Promise<[string, Level, number, Category] | null> {
   const counts = await bankCounts(db);
-  const n = (s: string, l: Level) => Number(counts.find((c) => c.skill === s && c.level === l && c.category === category)?.n ?? 0);
-  const skills = onlySkill ? [onlySkill] : ALL_SKILLS;
-  let best: [string, Level, number] | null = null;
-  for (const s of skills) for (const l of LEVELS) {
-    if (n(s, l) < LEVEL_TARGET[l] && (!best || n(s, l) < best[2])) best = [s, l, n(s, l)];
+  const n = (s: string, l: Level, c: Category) => Number(counts.find((x) => x.skill === s && x.level === l && x.category === c)?.n ?? 0);
+  let best: [string, Level, number, Category] | null = null;
+  for (const t of TARGETS) for (const l of LEVELS) {
+    const have = n(t.skill, l, t.category);
+    if (have < LEVEL_TARGET[l] && (!best || have < best[2])) best = [t.skill, l, have, t.category];
   }
   return best;
 }
@@ -53,7 +60,7 @@ while (calls < maxCalls) {
     await sleep(30_000); continue;
   }
   if (!pick) { console.log("✓ Target reached for every selected skill."); break; }
-  const [skill, level, have] = pick;
+  const [skill, level, have, category] = pick;
   try {
     const r = await growOnce(db, { skill, level, category });
     calls++; added += r.added; failures = 0;

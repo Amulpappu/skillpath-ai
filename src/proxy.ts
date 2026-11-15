@@ -3,7 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, authEnabled } from "@/lib/supabase/config";
 
 /** Pages that need an account. Everything else (landing, login, guest planner) is public. */
-const PROTECTED = ["/dashboard", "/practice", "/assessments", "/company", "/jobs", "/progress", "/settings"];
+const PROTECTED = ["/dashboard", "/settings"]; // practice, tests and company prep also work for guests (saved in the browser)
 
 /** Refreshes the Supabase session cookie and sends signed-out visitors on protected pages to /login. */
 export async function proxy(request: NextRequest) {

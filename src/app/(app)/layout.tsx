@@ -10,12 +10,12 @@ import { currentUser } from "@/lib/supabase/server";
 const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
   { href: "/dashboard", key: "nav.dashboard", ready: true },
   { href: "/plan", key: "nav.roadmap", ready: true },
-  { href: "/practice", key: "nav.practice", ready: false },
+  { href: "/practice", key: "nav.practice", ready: true },
   { href: "/assessments", key: "nav.assessments", ready: true },
-  { href: "/company", key: "nav.company", ready: false },
+  { href: "/company", key: "nav.company", ready: true },
   { href: "/jobs", key: "nav.jobs", ready: false },
   { href: "/courses", key: "nav.courses", ready: false },
-  { href: "/progress", key: "nav.progress", ready: false },
+  { href: "/progress", key: "nav.progress", ready: true },
 ];
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
