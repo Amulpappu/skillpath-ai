@@ -10,12 +10,17 @@ export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
   if (!authEnabled()) return response;
 
-  // A sign-in link can land on any page (Supabase falls back to the Site URL); finish it in the callback.
-  const code = request.nextUrl.searchParams.get("code");
-  if (code && !request.nextUrl.pathname.startsWith("/auth/")) {
+  const path = request.nextUrl.pathname;
+  // Sign-in pages handle their own cookies. Touching the session here could clear the
+  // one-time sign-in verifier (when an old, broken session cookie is present) before it is used.
+  if (path.startsWith("/auth/")) return response;
+
+  // A sign-in link can land on any page (Supabase falls back to the Site URL); finish it in the
+  // callback, keeping every parameter (including sb_flow_id, which identifies this sign-in).
+  if (request.nextUrl.searchParams.get("code")) {
     const url = request.nextUrl.clone();
     url.pathname = "/auth/callback";
-    url.search = `?code=${encodeURIComponent(code)}&next=/dashboard`;
+    if (!url.searchParams.get("next")) url.searchParams.set("next", "/dashboard");
     return NextResponse.redirect(url);
   }
 
@@ -31,7 +36,6 @@ export async function proxy(request: NextRequest) {
   });
   const { data } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
   if (!data.user && PROTECTED.some((p) => path === p || path.startsWith(p + "/"))) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";

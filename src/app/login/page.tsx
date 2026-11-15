@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import Link from "next/link";
 import { LoginButtons } from "./LoginButtons";
 import { Logo } from "@/components/Logo";
@@ -10,11 +8,13 @@ import { enabledProviders } from "@/lib/supabase/providers";
 
 export const metadata: Metadata = { title: "Sign in" };
 
+const LOGOS = new Set(["google", "github"]);
+
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string; reason?: string }> }) {
   const { t } = await getT();
   const { next, error, reason } = await searchParams;
-  // a logo is shown only if an official mark has been added to public/logos/<provider>.svg
-  const providers = (await enabledProviders()).map((p) => ({ ...p, logo: existsSync(join(process.cwd(), "public", "logos", `${p.id}.svg`)) }));
+  // marks shipped in public/logos (from the open-licensed Iconify "logos" set)
+  const providers = (await enabledProviders()).map((p) => ({ ...p, logo: LOGOS.has(p.id) }));
   const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
   return (
     <main id="main" className="grid min-h-screen place-items-center px-5 py-12">

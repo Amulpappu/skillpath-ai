@@ -10,9 +10,10 @@ export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const next = safeNext(url.searchParams.get("next"));
+  const flowId = url.searchParams.get("sb_flow_id");
   const supabase = await supabaseServer();
   if (code) {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { error } = await supabase.auth.exchangeCodeForSession(code, flowId ? { flowId } : undefined);
     if (!error) return NextResponse.redirect(new URL(next, url.origin));
     console.warn("Sign-in code exchange failed:", error.message);
   }
@@ -20,7 +21,11 @@ export async function GET(request: NextRequest) {
   if (data.user) return NextResponse.redirect(new URL(next, url.origin));
   if (code) {
     // The browser holds the PKCE code verifier; let it finish the sign-in.
-    return NextResponse.redirect(new URL(`/auth/finish?code=${encodeURIComponent(code)}&next=${encodeURIComponent(next)}`, url.origin));
+    const finish = new URL("/auth/finish", url.origin);
+    finish.searchParams.set("code", code);
+    finish.searchParams.set("next", next);
+    if (flowId) finish.searchParams.set("sb_flow_id", flowId);
+    return NextResponse.redirect(finish);
   }
   const reason = url.searchParams.get("error_description") ?? "missing";
   return NextResponse.redirect(new URL(`/login?error=signin&reason=${encodeURIComponent(reason.slice(0, 120))}`, url.origin));
