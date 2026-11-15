@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { AGENTS } from "@/lib/agents/registry";
 import { ALL_SKILLS, ROLES } from "@/lib/catalog";
+import { CATALOG_REVIEWED } from "@/lib/catalogGlobal";
 import { getT } from "@/lib/i18n/server";
 
 const STAGES = [
@@ -40,6 +41,7 @@ export default async function Landing() {
               </div>
             ))}
           </dl>
+          <p className="mt-3 text-sm text-muted">Roles, skills and courses reviewed {CATALOG_REVIEWED} for the AI era: every role includes an AI skill, and new roles cover AI engineering, agents and AI strategy.</p>
         </section>
 
         <section aria-labelledby="how" className="border-t border-line bg-card">

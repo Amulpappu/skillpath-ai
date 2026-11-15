@@ -1,5 +1,5 @@
 import type { Resource } from "./types";
-import { GLOBAL_ROLES, GLOBAL_SKILLS } from "./catalogGlobal";
+import { GLOBAL_ROLES, GLOBAL_SKILLS, aiSkillFor } from "./catalogGlobal";
 
 /** Skills each supported role needs. "core" skills weigh double in the match score. */
 /** The original 13 roles; their core skills have the offline question bank. */
@@ -59,7 +59,13 @@ export const BASE_ROLES: Record<string, { core: string[]; useful: string[] }> = 
 };
 
 /** v1 roles plus the v2 global roles. */
-export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[] }> = { ...BASE_ROLES, ...GLOBAL_ROLES };
+export const ROLE_REQUIREMENTS: Record<string, { core: string[]; useful: string[] }> = Object.fromEntries(
+  Object.entries({ ...BASE_ROLES, ...GLOBAL_ROLES }).map(([role, req]) => {
+    const ai = aiSkillFor(role, req.core);
+    const has = req.core.includes(ai) || req.useful.includes(ai);
+    return [role, { core: req.core, useful: has ? req.useful : [...req.useful, ai] }];
+  }),
+);
 
 export const ROLES = Object.keys(ROLE_REQUIREMENTS);
 

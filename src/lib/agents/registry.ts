@@ -20,7 +20,7 @@ export const AGENTS: AgentInfo[] = [
   { id: "profile-analyst", name: "Profile Analyst", stage: "understand", handsOffTo: ["career-matcher"],
     job: "Reads your skills, projects, interests and weekly time, and estimates how fast you learn." },
   { id: "career-matcher", name: "Career Matcher", stage: "understand", handsOffTo: ["learning-planner", "company-prep"],
-    job: "Scores your fit for 44 roles worldwide and lists the exact skills you are missing." },
+    job: "Scores your fit for every role in the catalogue, including new AI roles, and lists the exact skills you are missing." },
   { id: "learning-planner", name: "Learning Planner", stage: "plan", handsOffTo: ["course-curator", "practice-coach"],
     job: "Orders your skill gaps into a week-by-week roadmap sized to your pace and hours." },
   { id: "course-curator", name: "Course Curator", stage: "plan", handsOffTo: ["mentor"],

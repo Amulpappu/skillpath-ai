@@ -3,7 +3,7 @@ import { askGemini } from "../gemini";
 import type { Emit } from "../stream";
 import type { Profile, SkillAnalysis } from "../types";
 import { sanitizeForPrompt } from "../validation";
-import { DATA_RULE, dataBlock, runAgent } from "./runAgent";
+import { DATA_RULE, dataBlock, runAgent, MARKET_CONTEXT } from "./runAgent";
 
 const insight = z.object({ skill: z.string().min(1).max(60), reason: z.string().min(1).max(240) });
 const schema = z.object({
@@ -15,6 +15,7 @@ const schema = z.object({
 const SYSTEM = `You are the Skill Analyst agent in a multi-agent learning platform.
 Assess the learner's strengths and weaknesses from their skills, levels, certifications and projects.
 Base every point on the data given; do not invent skills. Keep each reason to one sentence.
+${MARKET_CONTEXT}
 ${DATA_RULE}
 Schema: {"strengths":[{"skill":string,"reason":string}],"weaknesses":[{"skill":string,"reason":string}],"summary":string}`;
 

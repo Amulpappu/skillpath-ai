@@ -180,3 +180,15 @@ describe("Global catalogue (v2)", () => {
     expect(Object.keys(ROLE_REQUIREMENTS).length).toBeGreaterThanOrEqual(40);
   });
 });
+
+describe("AI-era catalogue", () => {
+  it("adds one AI skill to every role and includes the new AI roles", async () => {
+    const { AI_SKILLS } = await import("@/lib/catalogGlobal");
+    for (const [role, req] of Object.entries(ROLE_REQUIREMENTS)) {
+      expect([...req.core, ...req.useful].some((s) => AI_SKILLS.includes(s)), role).toBe(true);
+    }
+    expect(Object.keys(ROLE_REQUIREMENTS)).toEqual(expect.arrayContaining(["AI Engineer (LLM apps)", "AI Agent Engineer", "AI Consultant / Strategist", "AI Security Engineer"]));
+    expect(ROLE_REQUIREMENTS["Full Stack Developer"].useful).toContain("AI-Assisted Coding");
+    expect(ROLE_REQUIREMENTS["Cyber Security Analyst"].useful).toContain("AI Security");
+  });
+});

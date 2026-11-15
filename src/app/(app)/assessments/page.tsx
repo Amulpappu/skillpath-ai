@@ -3,7 +3,7 @@ import { AssessmentRunner } from "@/components/AssessmentRunner";
 import { BANK_TARGET } from "@/lib/bank/quality";
 import { bankCounts } from "@/lib/bank/store";
 import { ALL_SKILLS } from "@/lib/catalog";
-import { PROGRAMMING_LANGUAGES } from "@/lib/catalogGlobal";
+import { AI_SKILLS, PROGRAMMING_LANGUAGES } from "@/lib/catalogGlobal";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Assessments" };
@@ -16,8 +16,9 @@ export default async function AssessmentsPage() {
   const total = (s: string) => counts.filter((c) => c.skill === s && c.category === "skill").reduce((t, c) => t + Number(c.n), 0);
   const groups = [
     { label: "Programming languages", skills: PROGRAMMING_LANGUAGES.filter((s) => ALL_SKILLS.includes(s)) },
+    { label: "AI skills (in demand)", skills: AI_SKILLS.filter((s) => ALL_SKILLS.includes(s)) },
     { label: "Placement fundamentals", skills: FUNDAMENTALS },
-    { label: "Tools, frameworks and domains", skills: ALL_SKILLS.filter((s) => !PROGRAMMING_LANGUAGES.includes(s) && !FUNDAMENTALS.includes(s)) },
+    { label: "Tools, frameworks and domains", skills: ALL_SKILLS.filter((s) => !PROGRAMMING_LANGUAGES.includes(s) && !FUNDAMENTALS.includes(s) && !AI_SKILLS.includes(s)) },
   ];
   const ready = ALL_SKILLS.filter((s) => total(s) >= BANK_TARGET).length;
   const bankTotal = ALL_SKILLS.reduce((t, s) => t + total(s), 0);

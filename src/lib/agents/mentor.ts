@@ -6,7 +6,7 @@ import { sanitizeForPrompt } from "../validation";
 import { runAssessmentReview } from "./assessmentAgent";
 import { runCareerMatcher } from "./careerMatcher";
 import { runLearningPlanner, runRemedialPlanner } from "./learningPlanner";
-import { DATA_RULE, dataBlock, runAgent } from "./runAgent";
+import { DATA_RULE, dataBlock, runAgent, MARKET_CONTEXT } from "./runAgent";
 import { runSkillAnalyst } from "./skillAnalyst";
 
 const schema = z.object({ message: z.string().min(1).max(600), nextAction: z.string().min(1).max(240) });
@@ -16,6 +16,7 @@ You receive the outputs of the Skill Analyst, Career Matcher, Learning Planner a
 Write a short, encouraging and honest message to the learner (2 to 3 sentences) that explains what the plan is and why,
 then one specific next action. If an event is given (goal change or weak quiz), explain how the plan changed because of it.
 Use only the facts provided.
+${MARKET_CONTEXT}
 ${DATA_RULE}
 Schema: {"message":string,"nextAction":string}`;
 

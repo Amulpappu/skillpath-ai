@@ -5,7 +5,7 @@ import { matchPercent, skillStatus } from "../scoring";
 import type { Emit } from "../stream";
 import type { CareerMatch, Profile, RequiredSkill, SkillAnalysis } from "../types";
 import { sanitizeForPrompt } from "../validation";
-import { DATA_RULE, dataBlock, runAgent } from "./runAgent";
+import { DATA_RULE, dataBlock, runAgent, MARKET_CONTEXT } from "./runAgent";
 
 type Requirement = Pick<RequiredSkill, "name" | "importance">;
 
@@ -20,6 +20,7 @@ const SYSTEM = `You are the Career Matcher agent in a multi-agent learning platf
 List the skills an entry-level candidate needs for the target role: 4 to 6 "core" skills and 2 to 4 "useful" skills.
 Use short, standard skill names (for example "JavaScript", "React", "SQL").
 If the role appears in the reference list, use those skills.
+${MARKET_CONTEXT}
 ${DATA_RULE}
 Schema: {"requiredSkills":[{"name":string,"importance":"core"|"useful"}]}`;
 
