@@ -4,12 +4,14 @@ import { LoginButtons } from "./LoginButtons";
 import { Logo } from "@/components/Logo";
 import { getT } from "@/lib/i18n/server";
 import { authEnabled } from "@/lib/supabase/config";
+import { enabledProviders } from "@/lib/supabase/providers";
 
 export const metadata: Metadata = { title: "Sign in" };
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string }> }) {
   const { t } = await getT();
   const { next, error } = await searchParams;
+  const providers = await enabledProviders();
   const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
   return (
     <main id="main" className="grid min-h-screen place-items-center px-5 py-12">
@@ -19,7 +21,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         <p className="mt-2 text-muted">{t("login.lead")}</p>
         <div className="mt-8">
           {authEnabled() ? (
-            <LoginButtons next={safeNext} labels={{ continueWith: t("login.continueWith"), failed: t("login.failed"), email: t("login.email"), sendLink: t("login.sendLink"), sent: t("login.sent"), or: t("login.or") }} />
+            <LoginButtons next={safeNext} providers={providers} labels={{ continueWith: t("login.continueWith"), failed: t("login.failed"), email: t("login.email"), sendLink: t("login.sendLink"), sent: t("login.sent"), or: t("login.or") }} />
           ) : (
             <p className="rounded-lg border border-warn bg-warn-soft p-4 text-sm text-warn">{t("login.disabled")}</p>
           )}

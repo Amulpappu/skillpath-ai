@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { PROVIDERS, type ProviderId } from "@/lib/supabase/config";
+import type { ProviderId } from "@/lib/supabase/config";
 
 type Labels = { continueWith: string; failed: string; email: string; sendLink: string; sent: string; or: string };
 
@@ -10,7 +10,7 @@ type Labels = { continueWith: string; failed: string; email: string; sendLink: s
  * Email sign-in (a one-time link, built into Supabase) plus any OAuth providers that are switched on.
  * If an official sign-in mark is placed at /public/logos/<provider>.svg it is shown on that button.
  */
-export function LoginButtons({ next, labels }: { next: string; labels: Labels }) {
+export function LoginButtons({ next, labels, providers }: { next: string; labels: Labels; providers: { id: ProviderId; label: string }[] }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -48,10 +48,10 @@ export function LoginButtons({ next, labels }: { next: string; labels: Labels })
           {busy === "email" ? "…" : labels.sendLink}
         </button>
       </form>
-      {PROVIDERS.length > 0 && (
+      {providers.length > 0 && (
         <>
           <p className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted"><span className="h-px flex-1 bg-line" />{labels.or}<span className="h-px flex-1 bg-line" /></p>
-          {PROVIDERS.map((p) => (
+          {providers.map((p) => (
             <button key={p.id} type="button" onClick={() => oauth(p.id)} disabled={busy !== null}
               className="flex w-full items-center justify-center gap-3 rounded-lg border border-line bg-white px-4 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink disabled:opacity-60">
               {/* eslint-disable-next-line @next/next/no-img-element */}
