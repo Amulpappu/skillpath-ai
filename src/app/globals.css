@@ -101,3 +101,9 @@ body {
     transition: none !important;
   }
 }
+
+/* The GitHub mark is black; show it white on dark backgrounds. */
+:root[data-theme="dark"] img[src$="/logos/github.svg"] { filter: invert(1); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img[src$="/logos/github.svg"] { filter: invert(1); }
+}

@@ -22,6 +22,7 @@ const NAV: { href: string; key: MessageKey; ready: boolean }[] = [
   { href: "/progress", key: "nav.progress", ready: true },
   { href: "/people", key: "nav.people", ready: true },
   { href: "/profile", key: "nav.profile", ready: true },
+  { href: "/account", key: "nav.account", ready: true },
   { href: "/settings", key: "nav.settings", ready: true },
 ];
 
@@ -33,6 +34,9 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   let avatar: { photo: string | null; choice: string | null } | null = null;
   let name = (user?.user_metadata?.full_name as string | undefined) ?? user?.email ?? "Guest";
   if (user) {
+    // Accounts with two-step verification must enter their code before using the app.
+    const { data: aal } = await (await supabaseServer()).auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") redirect("/auth/mfa");
     const { data: profile } = await (await supabaseServer()).from("profiles").select("full_name, xp, onboarded_at, avatar_url, avatar_choice").eq("id", user.id).single();
     // New accounts finish the short setup (basic info + tour) before they start learning.
     if (profile && !profile.onboarded_at) redirect("/welcome");
