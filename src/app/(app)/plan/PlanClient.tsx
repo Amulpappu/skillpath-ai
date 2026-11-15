@@ -57,7 +57,7 @@ function cleanProfile(profile: Profile): Profile {
   };
 }
 
-export function PlanClient({ accountName, accountRole }: { accountName: string; accountRole: string }) {
+export function PlanClient({ accountName, accountRole, githubUser }: { accountName: string; accountRole: string; githubUser: string }) {
   const [profile, setProfile] = useState<Profile>(() => ({ ...EMPTY_PROFILE, name: accountName, targetRole: accountRole || EMPTY_PROFILE.targetRole }));
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [doneStepIds, setDoneStepIds] = useState<string[]>([]);
@@ -214,6 +214,7 @@ export function PlanClient({ accountName, accountRole }: { accountName: string; 
               }}
               onReset={reset}
               busy={busy}
+              githubUser={githubUser}
               hasPlan={Boolean(result)}
             />
             <AgentLog events={log} busy={busy} />

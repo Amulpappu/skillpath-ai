@@ -2,6 +2,7 @@
 
 import { ALL_SKILLS, ROLES } from "@/lib/catalog";
 import type { Level, Profile } from "@/lib/types";
+import { GitHubCheck } from "./GitHubCheck";
 import { Button, Card, inputClass, labelClass } from "./ui";
 
 const LEVELS: Level[] = ["beginner", "intermediate", "advanced"];
@@ -15,12 +16,13 @@ interface Props {
   onReset: () => void;
   busy: boolean;
   hasPlan: boolean;
+  githubUser?: string;
 }
 
 const toLines = (items: string[]) => items.join("\n");
 const fromLines = (text: string) => text.split("\n");
 
-export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset, busy, hasPlan }: Props) {
+export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset, busy, hasPlan, githubUser = "" }: Props) {
   const isOther = !ROLES.includes(profile.targetRole);
   const setSkill = (index: number, patch: Partial<Profile["skills"][number]>) =>
     onChange({ ...profile, skills: profile.skills.map((s, i) => (i === index ? { ...s, ...patch } : s)) });
@@ -34,6 +36,8 @@ export function ProfileForm({ profile, onChange, onSubmit, onLoadSample, onReset
           onSubmit();
         }}
       >
+        <GitHubCheck profile={profile} onChange={onChange} defaultUser={githubUser} />
+
         <fieldset>
           <legend className={labelClass}>Current skills</legend>
           <ul className="space-y-2">
